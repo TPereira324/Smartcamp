@@ -1,6 +1,6 @@
-# FarmSIG
+# CocoRoot
 
-Este repositório contém o projeto **FarmSIG**, desenvolvido no âmbito da Unidade Curricular de **Projeto** da Universidade Europeia / IADE.
+Este repositório contém o projeto **CocoRoot**, desenvolvido no âmbito da Unidade Curricular de **Projeto** da Universidade Europeia / IADE.
 
 O projeto consiste numa aplicação web focada em **agricultura inteligente**, permitindo ao agricultor monitorizar e visualizar informações essenciais através de dashboards intuitivos. O objetivo é promover eficiência, sustentabilidade e inovação tecnológica no setor agrícola.
 
