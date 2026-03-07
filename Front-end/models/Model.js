@@ -1,9 +1,16 @@
 class Model {
     constructor() {
-        this.data = "Dados do Front-end MVC";
+        this.users = [
+            { username: 'admin', password: '123' },
+            { username: 'user', password: 'password' }
+        ];
     }
 
-    getData() {
-        return this.data;
+    login(username, password) {
+        const user = this.users.find(u => u.username === username && u.password === password);
+        if (user) {
+            return { success: true, user: user.username };
+        }
+        return { success: false, message: 'Usuário ou senha inválidos.' };
     }
 }
