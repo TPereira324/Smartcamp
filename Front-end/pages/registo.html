@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login - CocoRoot</title>
+    <title>Registo - CocoRoot</title>
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -20,18 +20,22 @@
                     <h1 class="brand-name">CocoRoot</h1>
                 </div>
                 
-                <form id="login-form" class="login-form">
+                <form id="register-form" class="login-form">
                     <div class="input-group">
-                        <label for="email">Nome e e-mail</label>
-                        <input type="email" id="email" name="email" placeholder="Digite o seu nome e e-mail" required>
+                        <label for="fullname">Nome e apelido</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Digite o seu nome completo" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="Digite o seu e-mail" required>
                     </div>
                     <div class="input-group">
                         <label for="password">Palavra-passe</label>
-                        <input type="password" id="password" name="password" placeholder="Digite a sua palavra-passe" required>
+                        <input type="password" id="password" name="password" placeholder="Crie uma palavra-passe" required>
                     </div>
                     <div class="button-group">
-                        <button type="submit" class="btn-primary">Entrar</button>
-                        <button type="button" class="btn-secondary" onclick="location.href='../pages/registo.html'">Registar-me</button>
+                        <button type="submit" class="btn-primary">Registar</button>
+                        <button type="button" class="btn-secondary" onclick="location.href='../pages/login.html'">Voltar</button>
                     </div>
                 </form>
             </div>

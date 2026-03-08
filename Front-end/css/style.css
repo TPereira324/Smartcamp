@@ -10,22 +10,38 @@ body {
 }
 
 .logo-section {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+}
+
+.logo-icon {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-icon img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
 }
 
 .brand-name {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #3e5c32;
     margin: 0.5rem 0;
+    font-weight: 700;
 }
 
 .slogan {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: #333;
     font-weight: 500;
+    margin-bottom: 2rem;
 }
 
 .features-list {
@@ -33,6 +49,8 @@ body {
     padding: 0;
     margin-bottom: 3rem;
     text-align: left;
+    display: inline-block;
+    max-width: 400px;
 }
 
 .features-list li {
@@ -52,60 +70,81 @@ body {
 .btn-primary {
     background-color: #3e5c32;
     color: white;
-    padding: 0.8rem;
+    padding: 1rem;
     border: none;
-    border-radius: 25px;
+    border-radius: 50px;
     font-size: 1.1rem;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
 .btn-primary:hover {
     background-color: #2d4525;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(62, 92, 50, 0.2);
 }
 
 .btn-secondary {
     background-color: #e0e0e0;
-    color: #666;
-    padding: 0.8rem;
+    color: #888;
+    padding: 1rem;
     border: none;
-    border-radius: 25px;
+    border-radius: 50px;
     font-size: 1.1rem;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
 .btn-secondary:hover {
     background-color: #d0d0d0;
+    transform: translateY(-2px);
 }
 
 /* Form Styles */
+.login-form {
+    width: 100%;
+    max-width: 380px;
+    margin-top: 2rem;
+}
+
 .input-group {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
     text-align: left;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 0.5rem;
-    color: #666;
-    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    color: #444;
+    font-size: 0.95rem;
+    font-weight: 600;
 }
 
 .input-group input {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    padding: 0.9rem 1rem;
+    border: 1.5px solid #eee;
+    border-radius: 12px;
     box-sizing: border-box;
     font-size: 1rem;
+    background-color: #fcfcfc;
+    transition: all 0.3s ease;
 }
 
-.login-container h2 {
-    margin-bottom: 1.5rem;
-    color: #333;
+.input-group input:focus {
+    outline: none;
+    border-color: #3e5c32;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(62, 92, 50, 0.1);
+}
+
+.input-group input::placeholder {
+    color: #bbb;
+    font-weight: 500;
 }
 
 .login-container .btn-primary {
