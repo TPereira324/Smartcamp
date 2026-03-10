@@ -1,8 +1,8 @@
 <?php
 
 class Controller {
-    protected $model;
-    protected $view;
+    private $model;
+    private $view;
 
     public function __construct($model, $view) {
         $this->model = $model;
