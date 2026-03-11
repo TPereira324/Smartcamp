@@ -3,7 +3,7 @@
 $host = "localhost";
 $bancodedados = "coco_db";
 $user = "root";
-$pass = "";
+$pass = "root";
 
 $mysqli = new mysqli($host, $user, $pass, $bancodedados);
 if ($mysqli->connect_errno) {
