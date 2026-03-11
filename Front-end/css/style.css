@@ -1,0 +1,177 @@
+/* Design Styles for CocoRoot */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.welcome-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logo-section {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-icon {
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-icon img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.brand-name {
+    font-size: 2.2rem;
+    color: #3e5c32;
+    margin: 0.1rem 0;
+    font-weight: 700;
+}
+
+.slogan {
+    font-size: 1.3rem;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 3rem;
+    text-align: left;
+    display: inline-block;
+    max-width: 400px;
+}
+
+.features-list li {
+    margin-bottom: 0.8rem;
+    color: #666;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.features-list li::before {
+    content: "●";
+    color: #3e5c32;
+    position: absolute;
+    left: 0;
+}
+
+.btn-primary {
+    background-color: #3e5c32;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #2d4525;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(62, 92, 50, 0.2);
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #888;
+    padding: 1rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-secondary:hover {
+    background-color: #d0d0d0;
+    transform: translateY(-2px);
+}
+
+.back-button {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 1000;
+    background-color: transparent;
+    color: white;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0;
+    box-shadow: none;
+}
+
+.back-button:hover {
+    transform: scale(1.2);
+    background-color: transparent;
+}
+
+.back-button svg {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Form Styles */
+.login-form {
+    width: 100%;
+    max-width: 380px;
+    margin-top: 1rem;
+}
+
+.input-group {
+    margin-bottom: 0.8rem;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.6rem;
+    color: #444;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #eee;
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+    background-color: #fcfcfc;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #3e5c32;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(62, 92, 50, 0.1);
+}
+
+.input-group input::placeholder {
+    color: #bbb;
+    font-weight: 500;
+}

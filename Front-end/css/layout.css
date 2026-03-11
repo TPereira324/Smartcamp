@@ -1,0 +1,61 @@
+/* Layout Styles for CocoRoot */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f7f6;
+}
+
+#app {
+    background: white;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+}
+
+.welcome-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.welcome-image {
+    width: 50%;
+    overflow: hidden;
+    border-right: 2px solid #007bff;
+}
+
+.welcome-content {
+    width: 50%;
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.button-group {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+.login-container,
+.home-container {
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
