@@ -86,6 +86,6 @@ class UtilizadorController {
 
     handleLogin(event) {
         event.preventDefault();
-        // Lógica de login similar...
+        
     }
 }
