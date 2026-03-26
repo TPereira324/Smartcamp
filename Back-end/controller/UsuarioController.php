@@ -13,6 +13,22 @@ class UsuarioController extends Controller {
     }
 
     /**
+     * Exibe a página inicial (Dashboard de Busca)
+     */
+    public function index(): void {
+        $busca = $_GET['busca'] ?? '';
+        $usuarios = [];
+        
+        if (!empty($busca)) {
+            $usuarios = $this->usuarioService->pesquisar($busca);
+        }
+
+        $this->view('dashboard/index', [
+            'usuarios' => $usuarios
+        ]);
+    }
+
+    /**
      * Endpoint para registo de novo utilizador
      */
     public function registar(): void {

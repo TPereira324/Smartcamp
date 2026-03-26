@@ -22,4 +22,17 @@ abstract class Controller {
             'mensagem' => $mensagem
         ], $status);
     }
+
+    /**
+     * Renderiza uma view PHP
+     */
+    protected function view(string $nome, array $dados = []): void {
+        extract($dados);
+        $ficheiro = __DIR__ . '/../views/' . $nome . '.php';
+        if (file_exists($ficheiro)) {
+            require $ficheiro;
+        } else {
+            die("Erro: View [$nome] não encontrada.");
+        }
+    }
 }

@@ -64,6 +64,13 @@ class UsuarioService {
     }
 
     /**
+     * Pesquisa utilizadores por nome ou email
+     */
+    public function pesquisar(string $termo): array {
+        return $this->usuarioRepository->pesquisarPorTermo($termo);
+    }
+
+    /**
      * Obtém os dados de perfil do utilizador
      */
     public function obterPerfil(int $id): UsuarioDto {

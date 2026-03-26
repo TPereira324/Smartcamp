@@ -49,6 +49,27 @@ class UsuarioRepository {
         );
     }
 
+    public function pesquisarPorTermo(string $termo): array {
+        $stmt = $this->db->prepare("SELECT * FROM usuarios WHERE nome LIKE ? OR email LIKE ?");
+        $like = "%$termo%";
+        $stmt->execute([$like, $like]);
+        $resultados = $stmt->fetchAll();
+
+        $usuarios = [];
+        foreach ($resultados as $dados) {
+            $usuarios[] = new Usuario(
+                id: (int)$dados['id'],
+                nome: $dados['nome'],
+                email: $dados['email'],
+                senha: $dados['senha'],
+                foto_perfil: $dados['foto_perfil'],
+                nivel_experiencia: $dados['nivel_experiencia'],
+                data_registo: $dados['data_registo']
+            );
+        }
+        return $usuarios;
+    }
+
     public function salvar(Usuario $usuario): bool {
         if ($usuario->id) {
             $stmt = $this->db->prepare("UPDATE usuarios SET nome = ?, email = ?, senha = ?, foto_perfil = ?, nivel_experiencia = ? WHERE id = ?");
