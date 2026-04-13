@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre nós - CocoRoot</title>
+    <link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body class="app-page">
+    
+
+    <div class="page-content">
+        <div class="page-title">Sobre nós</div>
+
+        <div class="dash-card" style="margin-bottom:18px;">
+            <div class="dash-card-title">Quem somos</div>
+            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:center;">
+                <div>
+                    <div style="font-weight:900;font-size:18px;margin-bottom:8px;">Agricultura inteligente para cultivo em fibra de coco.</div>
+                    <div style="color:var(--muted);line-height:1.7;">
+                        O CocoRoot ajuda produtores a gerir, monitorizar e otimizar explorações com foco em dados. Criamos uma experiência simples, prática e adequada ao dia a dia no campo.
+                    </div>
+                </div>
+                <div class="img-ph" style="height:180px;overflow:hidden;padding:0;">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;">
+            <div class="card">
+                <div style="font-weight:900;margin-bottom:8px;">Missão</div>
+                <div style="color:var(--muted);line-height:1.7;">Ajudar agricultores a tomar decisões baseadas em dados, com ferramentas simples e claras.</div>
+            </div>
+            <div class="card">
+                <div style="font-weight:900;margin-bottom:8px;">Visão</div>
+                <div style="color:var(--muted);line-height:1.7;">Tornar o cultivo em fibra de coco mais eficiente e sustentável, com apoio tecnológico acessível.</div>
+            </div>
+        </div>
+
+        <div class="dash-card" style="margin-bottom:18px;">
+            <div class="dash-card-title">A nossa equipa</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div style="width:42px;height:42px;border-radius:999px;background:rgba(62,92,50,0.12);border:1px solid rgba(27,27,27,0.10);"></div>
+                        <div>
+                            <div style="font-weight:900;">Equipa CocoRoot</div>
+                            <div style="color:var(--muted);font-size:13px;">Produto</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div style="width:42px;height:42px;border-radius:999px;background:rgba(62,92,50,0.12);border:1px solid rgba(27,27,27,0.10);"></div>
+                        <div>
+                            <div style="font-weight:900;">Equipa CocoRoot</div>
+                            <div style="color:var(--muted);font-size:13px;">Agronomia</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div style="width:42px;height:42px;border-radius:999px;background:rgba(62,92,50,0.12);border:1px solid rgba(27,27,27,0.10);"></div>
+                        <div>
+                            <div style="font-weight:900;">Equipa CocoRoot</div>
+                            <div style="color:var(--muted);font-size:13px;">Dados</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div style="width:42px;height:42px;border-radius:999px;background:rgba(62,92,50,0.12);border:1px solid rgba(27,27,27,0.10);"></div>
+                        <div>
+                            <div style="font-weight:900;">Equipa CocoRoot</div>
+                            <div style="color:var(--muted);font-size:13px;">Suporte</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="dash-card">
+                <div class="dash-card-title">Redes sociais</div>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                    <a href="#" style="text-decoration:none;color:rgba(27,27,27,0.86);font-weight:800;">Instagram</a>
+                    <a href="#" style="text-decoration:none;color:rgba(27,27,27,0.86);font-weight:800;">Facebook</a>
+                    <a href="#" style="text-decoration:none;color:rgba(27,27,27,0.86);font-weight:800;">LinkedIn</a>
+                </div>
+            </div>
+            <div class="dash-card">
+                <div class="dash-card-title">Onde comprar</div>
+                <div style="display:flex;flex-direction:column;gap:10px;color:var(--muted);line-height:1.7;">
+                    <div>Distribuidor local</div>
+                    <div>Revenda agrícola</div>
+                    <div>Contacte-nos para parceiros</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const grid = document.querySelector('.page-content > .dash-card > div[style*=\"grid-template-columns:1.2fr\"]');
+            if (!grid) return;
+            function adjust() {
+                if (window.innerWidth < 860) {
+                    grid.style.gridTemplateColumns = '1fr';
+                } else {
+                    grid.style.gridTemplateColumns = '1.2fr 1fr';
+                }
+            }
+            adjust();
+            window.addEventListener('resize', adjust);
+        })();
+    </script>
+<script src="../js/layout.js"></script>
+</body>
+</html>

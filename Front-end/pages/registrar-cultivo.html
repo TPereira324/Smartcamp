@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registar Cultivo — CocoRoot</title>
+    <link rel="stylesheet" href="../css/wireframe.css">
+    <link rel="stylesheet" href="../css/cultivo.css">
+</head>
+<body class="app-page">
+
+    
+
+    <div class="page-content">
+        <div class="cultivo-wrapper">
+
+            <div class="cultivo-topbar">
+                <a href="dashboard.html" class="back-link">← Voltar</a>
+                <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end;">
+                    <div class="cultivo-title">Registar Cultivo</div>
+                    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end;">
+                        <div class="cultivo-stepper" aria-hidden="true">
+                            <div class="cultivo-stepper-dot active" data-stepper-dot></div>
+                            <div class="cultivo-stepper-dot" data-stepper-dot></div>
+                            <div class="cultivo-stepper-dot" data-stepper-dot></div>
+                            <div class="cultivo-stepper-dot" data-stepper-dot></div>
+                            <div class="cultivo-stepper-dot" data-stepper-dot></div>
+                        </div>
+                        <div class="cultivo-stepmeta" data-step-meta>Passo 1 de 5</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cultivo-error" data-cultivo-error role="alert" hidden></div>
+
+            <form data-cultivo-form>
+
+                <section class="cultivo-step active" data-step="1" aria-label="Dimensões da parcela">
+                    <div class="cultivo-card">
+                        <div class="dash-card-title" style="margin-bottom:18px;">Preencher tamanho da parcela</div>
+
+                        <div class="field-row">
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label for="largura">Largura</label>
+                                <div class="field-inline">
+                                    <input id="largura" name="largura" type="number" min="0" step="0.01" inputmode="decimal" required>
+                                    <div class="field-unit">m</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label for="comprimento">Comprimento</label>
+                                <div class="field-inline">
+                                    <input id="comprimento" name="comprimento" type="number" min="0" step="0.01" inputmode="decimal" required>
+                                    <div class="field-unit">m</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label for="profundidade">Profundidade</label>
+                                <div class="field-inline">
+                                    <input id="profundidade" name="profundidade" type="number" min="0" step="0.01" inputmode="decimal" required>
+                                    <div class="field-unit">m</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="cultivo-step" data-step="2" aria-label="Tipo de cultivo">
+                    <div class="cultivo-card">
+                        <div class="dash-card-title" style="margin-bottom:18px;">Escolher tipo de cultura</div>
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label for="tipo">Tipo</label>
+                            <select id="tipo" name="tipo" class="btn" style="width:100%;text-align:left;letter-spacing:1px;text-transform:none;font-weight:bold;">
+                                <option value="" selected>Seleciona…</option>
+                                <option value="Tomate">Tomate</option>
+                                <option value="Morango">Morango</option>
+                                <option value="Pepino">Pepino</option>
+                                <option value="Pimento">Pimento</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="cultivo-step" data-step="3" aria-label="Objetivo do cultivo">
+                    <div class="cultivo-card">
+                        <div class="dash-card-title" style="margin-bottom:18px;">Escolher objetivo do cultivo</div>
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label for="objetivo">Objetivo</label>
+                            <select id="objetivo" name="objetivo" class="btn" style="width:100%;text-align:left;letter-spacing:1px;text-transform:none;font-weight:bold;">
+                                <option value="" selected>Seleciona…</option>
+                                <option value="Produção">Produção</option>
+                                <option value="Teste">Teste</option>
+                                <option value="Investigação">Investigação</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="cultivo-step" data-step="4" aria-label="Método de cultivo">
+                    <div class="cultivo-card">
+                        <div class="dash-card-title" style="margin-bottom:18px;">Escolher método de cultivo</div>
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label for="metodo">Método</label>
+                            <select id="metodo" name="metodo" class="btn" style="width:100%;text-align:left;letter-spacing:1px;text-transform:none;font-weight:bold;">
+                                <option value="" selected>Seleciona…</option>
+                                <option value="Vasos">Vasos</option>
+                                <option value="Hidroponia">Hidroponia</option>
+                                <option value="Substrato (fibra de coco)">Substrato (fibra de coco)</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="cultivo-step" data-step="5" aria-label="Confirmar e guardar">
+                    <div class="cultivo-card">
+                        <div class="dash-card-title" style="margin-bottom:18px;">Confirmar as informações</div>
+
+                        <div class="cultivo-summary" aria-label="Resumo">
+                            <div class="cultivo-summary-row">
+                                <div class="cultivo-summary-key">Parcela</div>
+                                <div class="cultivo-summary-val" data-summary-parcela>—</div>
+                            </div>
+                            <div class="cultivo-summary-row">
+                                <div class="cultivo-summary-key">Tipo</div>
+                                <div class="cultivo-summary-val" data-summary-tipo>—</div>
+                            </div>
+                            <div class="cultivo-summary-row">
+                                <div class="cultivo-summary-key">Objetivo</div>
+                                <div class="cultivo-summary-val" data-summary-objetivo>—</div>
+                            </div>
+                            <div class="cultivo-summary-row">
+                                <div class="cultivo-summary-key">Método</div>
+                                <div class="cultivo-summary-val" data-summary-metodo>—</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="cultivo-actions">
+                    <button class="btn" type="button" data-step-prev hidden>Voltar</button>
+                    <div style="margin-left:auto;display:flex;gap:12px;flex-wrap:wrap;">
+                        <button class="btn" type="button" data-step-next>Next →</button>
+                        <button class="btn" type="button" data-step-save hidden>Guardar cultivo</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script src="../js/registrarCultivo.js"></script>
+<script src="../js/layout.js"></script>
+</body>
+</html>

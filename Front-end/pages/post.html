@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artigo - CocoRoot</title>
+    <link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body class="app-page">
+    
+
+    <div class="page-content" style="max-width:820px;">
+        <div style="margin-bottom:18px;">
+            <a href="noticias.html" class="back-link">← Voltar às Notícias</a>
+        </div>
+
+        <div class="detalhe-actions" aria-hidden="true">
+            <span>♡</span>
+            <span>⤴</span>
+        </div>
+
+        <h1 id="post-title" style="font-size:34px;letter-spacing:-0.6px;line-height:1.15;margin-bottom:10px;">Como iniciar a produção de fibra de coco</h1>
+        <div id="post-meta" style="color:var(--muted);margin-bottom:22px;">21/03/26 • 8 min</div>
+
+        <div class="detalhe-img img-ph" style="overflow:hidden;padding:0;">
+            
+        </div>
+
+        <div id="post-body" style="display:flex;flex-direction:column;gap:12px;line-height:1.75;color:rgba(27,27,27,0.82);">
+            <p>Começar a produção de fibra de coco é mais simples quando existe um processo claro. O objetivo é obter um substrato consistente, bem drenado e estável.</p>
+            <p>Antes de avançar, define o teu método de preparação e garante que tens os materiais essenciais. O controlo de humidade e a drenagem são críticos para evitar problemas nas primeiras semanas.</p>
+            <p>Com uma rotina bem definida, consegues reduzir desperdício, aumentar a uniformidade e melhorar a produtividade ao longo do tempo.</p>
+        </div>
+
+        <div class="comments-section">
+            <div class="comment-title">Comentários</div>
+
+            <div class="comment-item">
+                <div class="comment-avatar"></div>
+                <div class="comment-lines">
+                    <div style="font-weight:800;margin-bottom:4px;">Produtor</div>
+                    <div style="color:var(--muted);line-height:1.6;">Gostei do passo a passo. Vou aplicar já na próxima preparação.</div>
+                </div>
+            </div>
+
+            <div class="comment-item">
+                <div class="comment-avatar"></div>
+                <div class="comment-lines">
+                    <div style="font-weight:800;margin-bottom:4px;">CocoRoot</div>
+                    <div style="color:var(--muted);line-height:1.6;">Se quiseres, segue o guia “Preparação do substrato” em Começar do Zero.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id') || '1';
+            const data = {
+                '1': { title: 'Como iniciar a produção de fibra de coco', meta: '21/03/26 • 8 min', img: '../image/planta.jpeg' },
+                '2': { title: 'Tendências de mercado para 2026', meta: '20/03/26 • 5 min', img: '../image/Coco.jpeg' },
+                '3': { title: 'Substrato de fibra de coco: erros comuns', meta: '18/03/26 • 6 min', img: '../image/planta.jpeg' },
+                '4': { title: 'Rega e drenagem: como acertar no ponto', meta: '15/03/26 • 7 min', img: '../image/Coco.jpeg' },
+            };
+            const post = data[id] || data['1'];
+            document.getElementById('post-title').textContent = post.title;
+            document.getElementById('post-meta').textContent = post.meta;
+            document.getElementById('post-img').setAttribute('src', post.img);
+            document.title = post.title + ' - CocoRoot';
+        })();
+    </script>
+<script src="../js/layout.js"></script>
+</body>
+</html>

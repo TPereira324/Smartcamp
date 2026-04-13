@@ -1,0 +1,143 @@
+.cultivo-wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 40px;
+}
+
+.cultivo-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 3px solid #222;
+    flex-wrap: wrap;
+}
+
+.cultivo-title {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.cultivo-stepmeta {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #555;
+}
+
+.cultivo-stepper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.cultivo-stepper-dot {
+    width: 34px;
+    height: 6px;
+    border: 2px solid #222;
+    background: #fff;
+}
+
+.cultivo-stepper-dot.active {
+    background: #222;
+}
+
+.cultivo-step {
+    display: none;
+}
+
+.cultivo-step.active {
+    display: block;
+}
+
+.cultivo-card {
+    border: 2px solid #222;
+    padding: 18px;
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.field-inline {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: end;
+}
+
+.field-unit {
+    border: 3px solid #222;
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    height: 53px;
+    display: flex;
+    align-items: center;
+}
+
+.cultivo-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+
+.cultivo-actions .btn {
+    min-width: 160px;
+}
+
+.cultivo-error {
+    border: 2px solid #b42318;
+    background: #fffbfa;
+    color: #7a271a;
+    padding: 12px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+}
+
+.cultivo-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cultivo-summary-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cultivo-summary-key {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #555;
+}
+
+.cultivo-summary-val {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 520px) {
+    .cultivo-wrapper { padding: 32px 20px; }
+    .cultivo-actions .btn { width: 100%; }
+}

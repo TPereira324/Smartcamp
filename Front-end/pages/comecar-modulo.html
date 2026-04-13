@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo - CocoRoot</title>
+    <link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body class="app-page">
+    
+
+    <div class="page-content" style="max-width:900px;">
+        <div style="margin-bottom:18px;">
+            <a href="comecar.html" class="back-link">← Voltar ao Guia</a>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px;">
+            <div>
+                <div id="modulo-kicker" style="font-size:12px;font-weight:900;letter-spacing:0.2px;color:var(--muted);margin-bottom:6px;">MÓDULO 1</div>
+                <div id="modulo-title" style="font-size:30px;font-weight:900;letter-spacing:-0.6px;line-height:1.15;">Introdução</div>
+            </div>
+            <div id="modulo-status" style="border:1px solid rgba(27,27,27,0.14);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;color:rgba(27,27,27,0.74);background:rgba(255,255,255,0.92);box-shadow:0 14px 26px rgba(0,0,0,0.06);">● Em curso</div>
+        </div>
+
+        <div class="modulo-img img-ph" style="overflow:hidden;padding:0;">
+            
+        </div>
+
+        <div style="font-size:12px;font-weight:900;letter-spacing:0.2px;text-transform:uppercase;margin-bottom:12px;color:rgba(27,27,27,0.78);">Passo a Passo</div>
+        <ul class="step-checklist">
+            <li>
+                <div class="step-check done">✓</div>
+                <div style="flex:1;">
+                    <div style="font-weight:900;margin-bottom:4px;">Preparar o espaço de trabalho</div>
+                    <div style="color:var(--muted);line-height:1.6;">Organize materiais e assegure ventilação e limpeza.</div>
+                </div>
+            </li>
+            <li>
+                <div class="step-check done">✓</div>
+                <div style="flex:1;">
+                    <div style="font-weight:900;margin-bottom:4px;">Verificar drenagem</div>
+                    <div style="color:var(--muted);line-height:1.6;">Garanta escoamento e retenção equilibrados.</div>
+                </div>
+            </li>
+            <li>
+                <div class="step-check"></div>
+                <div style="flex:1;">
+                    <div style="font-weight:900;margin-bottom:4px;">Medir humidade</div>
+                    <div style="color:var(--muted);line-height:1.6;">Comece com valores base para ajustar a rega.</div>
+                </div>
+            </li>
+            <li>
+                <div class="step-check"></div>
+                <div style="flex:1;">
+                    <div style="font-weight:900;margin-bottom:4px;">Registar no dashboard</div>
+                    <div style="color:var(--muted);line-height:1.6;">Guarde medições e notas para acompanhamento.</div>
+                </div>
+            </li>
+        </ul>
+
+        <div style="margin-top:26px;">
+            <div style="font-size:12px;font-weight:900;letter-spacing:0.2px;text-transform:uppercase;margin-bottom:12px;color:rgba(27,27,27,0.78);">Materiais Necessários</div>
+            <div class="materiais-grid">
+                <ul class="materiais-list">
+                    <li><div class="bullet"></div><div style="flex:1;">Balde / recipiente</div></li>
+                    <li><div class="bullet"></div><div style="flex:1;">Medidor de pH/EC (opcional)</div></li>
+                    <li><div class="bullet"></div><div style="flex:1;">Regador / sistema de rega</div></li>
+                    <li><div class="bullet"></div><div style="flex:1;">Luvas e tesoura</div></li>
+                </ul>
+                <div class="img-ph" style="height:160px;overflow:hidden;padding:0;">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:22px;display:flex;justify-content:flex-end;">
+            <a id="next-module" href="comecar-modulo.html?mod=2" class="btn">Próximo Módulo →</a>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const mod = parseInt(params.get('mod') || '1', 10);
+            const modules = {
+                1: { title: 'Introdução', img: '../image/planta.jpeg' },
+                2: { title: 'Preparação do substrato', img: '../image/Coco.jpeg' },
+                3: { title: 'Plantio e rega', img: '../image/planta.jpeg' },
+                4: { title: 'Manutenção', img: '../image/Coco.jpeg' },
+            };
+            const current = modules[mod] || modules[1];
+            document.getElementById('modulo-kicker').textContent = 'MÓDULO ' + (modules[mod] ? mod : 1);
+            document.getElementById('modulo-title').textContent = current.title;
+            document.getElementById('modulo-img').setAttribute('src', current.img);
+            const next = mod >= 4 ? 1 : (mod + 1);
+            document.getElementById('next-module').setAttribute('href', 'comecar-modulo.html?mod=' + next);
+            document.title = 'Módulo ' + (modules[mod] ? mod : 1) + ' - CocoRoot';
+        })();
+    </script>
+<script src="../js/layout.js"></script>
+</body>
+</html>

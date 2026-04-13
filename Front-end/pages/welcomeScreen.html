@@ -1,42 +1,49 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome - CocoRoot</title>
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/wireframe.css">
 </head>
+<body class="auth-page">
+    <div class="auth-img img-ph" style="overflow:hidden;padding:0;">
+        
+    </div>
 
-<body class="auth-body">
-    <div id="app" class="welcome-page">
-        <div class="welcome-container">
-            <div class="welcome-image">
-                <img src="../image/Coco.jpeg" alt="Coconuts">
-            </div>
-            <div class="welcome-content">
-                <div class="logo-section">
-                    <div class="logo-icon">
-                        <img src="../image/logo.jpeg" alt="CocoRoot Logo">
-                    </div>
-                    <h1 class="brand-name">CocoRoot</h1>
-                    <p class="slogan">Gestão inteligente para os seus cultivos</p>
-                </div>
+    <div class="auth-form">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;">
+            <a href="principal.html" class="back-link">← Home</a>
+            <a href="noticias.html" class="nav-btn">Explorar</a>
+        </div>
 
-                <ul class="features-list">
-                    <li>Monitorize as suas culturas em tempo real</li>
-                    <li>Receba alertas e dicas personalizadas</li>
-                    <li>Aprenda com outros agricultores</li>
-                </ul>
+        <div class="auth-logo">
+            <span style="display:flex;align-items:center;gap:10px;">
+                
+                <span>CocoRoot</span>
+            </span>
+        </div>
 
-                <div class="button-group">
-                    <button class="btn-primary" onclick="location.href='login.html'">Entrar</button>
-                    <button class="btn-secondary" onclick="location.href='registo.html'">Registar-me</button>
-                </div>
-            </div>
+        <ul class="feature-placeholder-list" style="gap:12px;">
+            <li style="height:auto;background:none;">
+                <div style="font-weight:900;margin-bottom:6px;">Monitorize as suas culturas em tempo real</div>
+                <div style="color:var(--muted);line-height:1.6;">Acompanhe humidade, temperatura e progresso.</div>
+            </li>
+            <li style="height:auto;background:none;">
+                <div style="font-weight:900;margin-bottom:6px;">Receba alertas e dicas personalizadas</div>
+                <div style="color:var(--muted);line-height:1.6;">Tome decisões mais rápidas e seguras.</div>
+            </li>
+            <li style="height:auto;background:none;">
+                <div style="font-weight:900;margin-bottom:6px;">Aprenda com outros agricultores</div>
+                <div style="color:var(--muted);line-height:1.6;">Partilhe dúvidas, dicas e experiências.</div>
+            </li>
+        </ul>
+
+        <div class="btn-group">
+            <a href="login.html" class="btn full">Entrar</a>
+            <a href="registo.html" class="btn full">Registar</a>
         </div>
     </div>
+<script src="../js/layout.js"></script>
 </body>
-
 </html>
