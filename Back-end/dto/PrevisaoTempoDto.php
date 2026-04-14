@@ -3,16 +3,6 @@
 namespace App\Dto;
 
 readonly class PrevisaoTempoDto {
-    /**
-     * @param string $cidade
-     * @param float $temperatura
-     * @param int $humidade
-     * @param string $descricao
-     * @param float $sensacao_termica
-     * @param float $temp_min
-     * @param float $temp_max
-     * @param string $icon
-     */
     public function __construct(
         public string $cidade,
         public float $temperatura,
@@ -24,9 +14,6 @@ readonly class PrevisaoTempoDto {
         public string $icon
     ) {}
 
-    /**
-     * Cria um DTO a partir da resposta da API OpenWeather
-     */
     public static function fromApiResponse(array $dados): self {
         return new self(
             cidade: $dados['name'] ?? 'Desconhecida',

@@ -3,15 +3,6 @@
 namespace App\Model;
 
 class Usuario {
-    /**
-     * @param int|null $id
-     * @param string $nome
-     * @param string $email
-     * @param string|null $senha
-     * @param string|null $foto_perfil
-     * @param string $nivel_experiencia (iniciante, intermediario, experiente)
-     * @param string|null $data_registo
-     */
     public function __construct(
         public ?int $id = null,
         public string $nome,

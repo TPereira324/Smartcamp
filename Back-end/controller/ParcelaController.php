@@ -13,9 +13,6 @@ class ParcelaController extends Controller {
         $this->parcelaService = new ParcelaService();
     }
 
-    /**
-     * Adicionar nova parcela via POST
-     */
     public function adicionar(): void {
         try {
             $parcelaDto = ParcelaDto::fromArray($_POST);
@@ -31,9 +28,6 @@ class ParcelaController extends Controller {
         }
     }
 
-    /**
-     * Listar parcelas de um utilizador via GET
-     */
     public function listar(int $usuario_id): void {
         try {
             $parcelas = $this->parcelaService->listarParcelasDoUsuario($usuario_id);

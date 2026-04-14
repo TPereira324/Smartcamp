@@ -3,15 +3,6 @@
 namespace App\Dto;
 
 readonly class ParcelaDto {
-    /**
-     * @param int|null $id
-     * @param int $usuario_id
-     * @param string $nome
-     * @param string $tipo_cultura
-     * @param float $area_m2
-     * @param string $data_plantio
-     * @param string $status
-     */
     public function __construct(
         public ?int $id,
         public int $usuario_id,

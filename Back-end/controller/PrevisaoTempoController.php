@@ -12,10 +12,6 @@ class PrevisaoTempoController extends Controller {
         $this->previsaoTempoService = new PrevisaoTempoService();
     }
 
-    /**
-     * Endpoint para consultar a meteorologia de uma cidade
-     * Exemplo: /api/clima?cidade=Lisboa
-     */
     public function consultar(): void {
         try {
             

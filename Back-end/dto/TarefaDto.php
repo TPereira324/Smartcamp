@@ -3,16 +3,6 @@
 namespace App\Dto;
 
 readonly class TarefaDto {
-    /**
-     * @param int|null $id
-     * @param int $usuario_id
-     * @param int|null $parcela_id
-     * @param string $titulo
-     * @param string $descricao
-     * @param string $data_limite
-     * @param bool $concluida
-     * @param string $prioridade
-     */
     public function __construct(
         public ?int $id,
         public int $usuario_id,

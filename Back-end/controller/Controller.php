@@ -3,9 +3,6 @@
 namespace App\Controller;
 
 abstract class Controller {
-    /**
-     * Devolve uma resposta JSON formatada
-     */
     protected function json(mixed $dados, int $status = 200): void {
         header('Content-Type: application/json; charset=utf-8');
         http_response_code($status);
@@ -13,9 +10,6 @@ abstract class Controller {
         exit;
     }
 
-    /**
-     * Devolve uma resposta de erro JSON
-     */
     protected function erro(string $mensagem, int $status = 400): void {
         $this->json([
             'status' => 'erro',
@@ -23,9 +17,6 @@ abstract class Controller {
         ], $status);
     }
 
-    /**
-     * Renderiza uma view PHP
-     */
     protected function view(string $nome, array $dados = []): void {
         extract($dados);
         $ficheiro = __DIR__ . '/../views/' . $nome . '.php';

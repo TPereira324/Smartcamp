@@ -13,9 +13,6 @@ class ForumController extends Controller {
         $this->forumService = new ForumService();
     }
 
-    /**
-     * Publicar novo tópico via POST
-     */
     public function publicar(): void {
         try {
             $forumDto = ForumDto::fromArray($_POST);
@@ -31,9 +28,6 @@ class ForumController extends Controller {
         }
     }
 
-    /**
-     * Listar todos os tópicos via GET
-     */
     public function listar(): void {
         try {
             $topicos = $this->forumService->listarTopicos();

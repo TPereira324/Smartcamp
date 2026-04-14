@@ -3,14 +3,6 @@
 namespace App\Dto;
 
 readonly class UsuarioDto {
-    /**
-     * @param int|null $id
-     * @param string $nome
-     * @param string $email
-     * @param string|null $foto_perfil
-     * @param string $nivel_experiencia
-     * @param string|null $data_registo
-     */
     public function __construct(
         public ?int $id,
         public string $nome,
@@ -20,9 +12,6 @@ readonly class UsuarioDto {
         public ?string $data_registo
     ) {}
 
-    /**
-     * Cria um DTO a partir de um array (útil para requests)
-     */
     public static function fromArray(array $dados): self {
         return new self(
             id: $dados['id'] ?? null,

@@ -12,9 +12,6 @@ class UsuarioController extends Controller {
         $this->usuarioService = new UsuarioService();
     }
 
-    /**
-     * Endpoint para registo de novo utilizador
-     */
     public function registar(): void {
         try {
             $dados = $_POST;
@@ -34,9 +31,6 @@ class UsuarioController extends Controller {
         }
     }
 
-    /**
-     * Endpoint para login
-     */
     public function login(): void {
         try {
             $dados = $_POST;
@@ -55,9 +49,6 @@ class UsuarioController extends Controller {
         }
     }
 
-    /**
-     * Endpoint para obter perfil
-     */
     public function perfil(int $id): void {
         try {
             $usuarioDto = $this->usuarioService->obterPerfil($id);

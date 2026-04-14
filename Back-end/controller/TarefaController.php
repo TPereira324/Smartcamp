@@ -13,9 +13,6 @@ class TarefaController extends Controller {
         $this->tarefaService = new TarefaService();
     }
 
-    /**
-     * Adicionar nova tarefa via POST
-     */
     public function adicionar(): void {
         try {
             $tarefaDto = TarefaDto::fromArray($_POST);
@@ -31,9 +28,6 @@ class TarefaController extends Controller {
         }
     }
 
-    /**
-     * Alternar estado (concluída/pendente) via POST/PATCH
-     */
     public function alternarEstado(int $id): void {
         try {
             $concluida = (bool)($_POST['concluida'] ?? false);
@@ -52,9 +46,6 @@ class TarefaController extends Controller {
         }
     }
 
-    /**
-     * Listar tarefas do utilizador via GET
-     */
     public function listar(int $usuario_id): void {
         try {
             $tarefas = $this->tarefaService->listarTarefasDoUsuario($usuario_id);
