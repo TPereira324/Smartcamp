@@ -83,8 +83,8 @@ class UtilizadorController {
         try {
             if (this.model && typeof this.model.register === 'function') {
                 const result = await this.model.register(userData);
-                if (result && (result.status === 'error' || result.success === false)) {
-                    this.view.displayMessage(result.message || 'Falha ao registar.', true);
+                if (!result || result.success !== true) {
+                    this.view.displayMessage(result?.message || 'Falha ao registar.', true);
                     return;
                 }
             }

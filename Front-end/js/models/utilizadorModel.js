@@ -1,26 +1,22 @@
 class UtilizadorModel {
     async register(userData) {
+        const endpoint = 'http://localhost/Back-end/registrar.php';
         try {
-            const response = await fetch('/Back-end/registrar.php', {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData),
             });
 
-            if (!response.ok) {
-                throw new Error('Request failed');
+            const data = await response.json().catch(() => null);
+
+            if (!response.ok || !data) {
+                return { success: false, message: 'Servidor indisponivel para registo.' };
             }
 
-            return await response.json();
+            return data;
         } catch (error) {
-            try {
-                const users = JSON.parse(localStorage.getItem('users')) || [];
-                users.push(userData);
-                localStorage.setItem('users', JSON.stringify(users));
-                return { success: true };
-            } catch (e) {
-                return { status: 'error', message: 'Falha na ligação com o servidor.' };
-            }
+            return { success: false, message: 'Falha na ligacao ao servidor de registo.' };
         }
     }
 }
