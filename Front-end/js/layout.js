@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const currentPath = window.location.pathname.split('/').pop() || 'principal.html';
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const headerHTML = `
     <nav class="nav">
@@ -14,11 +15,18 @@ document.addEventListener("DOMContentLoaded", () => {
             <a href="comunidade.html" class="nav-link ${currentPath.includes('comunidade') ? 'active' : ''}">Comunidade</a>
             <a href="comecar.html" class="nav-link ${currentPath.includes('comecar') ? 'active' : ''}">Guia</a>
             <a href="sobre.html" class="nav-link ${currentPath.includes('sobre') ? 'active' : ''}">Sobre nós</a>
+            ${user && user.role === 'admin' ? '<a href="dashboard.html?admin=true" class="nav-link" style="color:var(--primary);font-weight:900;">Admin</a>' : ''}
         </div>
         <div class="nav-right">
-            <a href="login.html" class="nav-btn">Entrar</a>
-            <a href="registo.html" class="nav-btn">Criar Conta</a>
-            <a href="welcomeScreen.html" class="nav-user" aria-label="Perfil" title="Perfil">U</a>
+            ${user ? `
+                <span class="nav-user-info" style="font-size:13px;color:var(--muted);margin-right:10px;">${user.nome}</span>
+                <a href="#" id="logout-btn" class="nav-link" style="font-weight:800;color:red;margin-right:10px;">Sair</a>
+                <a href="welcomeScreen.html" class="nav-user" aria-label="Perfil" title="Perfil">${user.nome.charAt(0).toUpperCase()}</a>
+            ` : `
+                <a href="login.html" class="nav-btn">Entrar</a>
+                <a href="registo.html" class="nav-btn">Criar Conta</a>
+                <a href="welcomeScreen.html" class="nav-user" aria-label="Perfil" title="Perfil">U</a>
+            `}
         </div>
     </nav>
     `;
@@ -50,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         </div>
         <div class="footer-actions">
-            <a href="login.html" class="btn">Entrar</a>
+            ${user ? '' : '<a href="login.html" class="btn">Entrar</a>'}
         </div>
     </footer>
     `;
@@ -59,16 +67,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!document.body.classList.contains('auth-page') && !document.querySelector('.nav')) {
         document.body.insertAdjacentHTML('afterbegin', headerHTML);
     } else if (document.querySelector('.nav')) {
-        // If there's already a nav (hardcoded), replace it to ensure consistency
         document.querySelector('.nav').outerHTML = headerHTML;
     }
 
-    // Inject footer at the end of body (except auth pages which don't need a footer usually, or if they do we can append it)
+    // Inject footer at the end of body
     if (!document.body.classList.contains('auth-page')) {
         if (document.querySelector('.footer')) {
             document.querySelector('.footer').outerHTML = footerHTML;
         } else {
             document.body.insertAdjacentHTML('beforeend', footerHTML);
         }
+    }
+
+    // Handle Logout
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('user');
+            window.location.href = 'principal.html';
+        });
     }
 });

@@ -46,12 +46,27 @@ document.getElementById('login-form').addEventListener('submit', async function(
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
+    // Hardcoded admin login for testing/experience
+    if (email === 'admin@cocoroot.com' && password === 'admin') {
+        const adminUser = {
+            id: 0,
+            nome: 'Administrador',
+            email: 'admin@cocoroot.com',
+            role: 'admin'
+        };
+        localStorage.setItem('user', JSON.stringify(adminUser));
+        window.location.href = 'dashboard.html';
+        return;
+    }
+
     try {
         const response = await fetch('http://localhost/Back-end/login.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
+        
+        // ... (rest of the logic)
         const data = await response.json();
         if (data.success) {
             localStorage.setItem('user', JSON.stringify(data.user));

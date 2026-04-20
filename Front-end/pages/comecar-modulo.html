@@ -73,8 +73,9 @@
             </div>
         </div>
 
-        <div style="margin-top:22px;display:flex;justify-content:flex-end;">
-            <a id="next-module" href="comecar-modulo.html?mod=2" class="btn">Próximo Módulo →</a>
+        <div style="margin-top:22px;display:flex;justify-content:flex-end;gap:12px;">
+            <button id="finish-module" class="btn" style="background:var(--primary);color:white;">Concluir Módulo</button>
+            <a id="next-module" href="comecar-modulo.html?mod=2" class="btn" style="display:none;">Próximo Módulo →</a>
         </div>
     </div>
 
@@ -91,9 +92,45 @@
             const current = modules[mod] || modules[1];
             document.getElementById('modulo-kicker').textContent = 'MÓDULO ' + (modules[mod] ? mod : 1);
             document.getElementById('modulo-title').textContent = current.title;
-            document.getElementById('modulo-img').setAttribute('src', current.img);
-            const next = mod >= 4 ? 1 : (mod + 1);
-            document.getElementById('next-module').setAttribute('href', 'comecar-modulo.html?mod=' + next);
+            
+            // Fix: set image if element exists or just update the placeholder
+            const imgPlaceholder = document.querySelector('.modulo-img');
+            if (imgPlaceholder) {
+                imgPlaceholder.innerHTML = `<img src="${current.img}" style="width:100%;height:100%;object-fit:cover;" alt="${current.title}">`;
+            }
+
+            const next = mod + 1;
+            const nextBtn = document.getElementById('next-module');
+            const finishBtn = document.getElementById('finish-module');
+
+            // Check if already completed
+            const completedModules = JSON.parse(localStorage.getItem('completedModules') || '[]');
+            if (completedModules.includes(mod)) {
+                finishBtn.style.display = 'none';
+                if (modules[next]) {
+                    nextBtn.style.display = 'inline-block';
+                    nextBtn.setAttribute('href', 'comecar-modulo.html?mod=' + next);
+                }
+                document.getElementById('modulo-status').textContent = '● Concluído';
+                document.getElementById('modulo-status').style.color = 'var(--primary)';
+            }
+
+            finishBtn.addEventListener('click', () => {
+                const completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
+                if (!completed.includes(mod)) {
+                    completed.push(mod);
+                    localStorage.setItem('completedModules', JSON.stringify(completed));
+                }
+                
+                finishBtn.style.display = 'none';
+                if (modules[next]) {
+                    nextBtn.style.display = 'inline-block';
+                    nextBtn.setAttribute('href', 'comecar-modulo.html?mod=' + next);
+                }
+                document.getElementById('modulo-status').textContent = '● Concluído';
+                document.getElementById('modulo-status').style.color = 'var(--primary)';
+            });
+
             document.title = 'Módulo ' + (modules[mod] ? mod : 1) + ' - CocoRoot';
         })();
     </script>
