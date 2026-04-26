@@ -43,6 +43,7 @@
             </div>
         </form>
     </div>
+    <script src="../js/api.js"></script>
     <script src="../js/layout.js"></script>
     <script>
         const loginPasswordInput = document.getElementById('password');
@@ -59,20 +60,9 @@
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const endpoint = new URL('../../Back-end/login.php', window.location.href).toString();
-
-            // Hardcoded admin login for testing/experience
-            if (email === 'admin@cocoroot.com' && password === 'admin') {
-                const adminUser = {
-                    id: 0,
-                    nome: 'Administrador',
-                    email: 'admin@cocoroot.com',
-                    role: 'admin'
-                };
-                localStorage.setItem('user', JSON.stringify(adminUser));
-                window.location.href = 'dashboard.html';
-                return;
-            }
+            const endpoint = window.CocoRootApi
+                ? window.CocoRootApi.buildPhpUrl('login.php')
+                : new URL('../../Back-end/login.php', window.location.href).toString();
 
             try {
                 const response = await fetch(endpoint, {

@@ -1,6 +1,7 @@
 (() => {
     const form = document.querySelector('[data-cultivo-form]');
     if (!form) return;
+    const api = window.CocoRootApi;
 
     const stepMeta = document.querySelector('[data-step-meta]');
     const stepperDots = Array.from(document.querySelectorAll('[data-stepper-dot]'));
@@ -120,7 +121,7 @@
         showStep(state.step - 1);
     };
 
-    const save = () => {
+    const save = async () => {
         const err = validateStep(1) || validateStep(2) || validateStep(3) || validateStep(4);
         if (err) {
             setError(err);
@@ -128,33 +129,38 @@
             return;
         }
         syncState();
+        const user = api?.requireLoggedUser?.();
+        if (!user) return;
 
-        const id = (globalThis.crypto?.randomUUID && globalThis.crypto.randomUUID()) || String(Date.now());
-        const cultivo = {
-            id,
-            parcela: {
-                largura: Number(String(state.largura).replace(',', '.')),
-                comprimento: Number(String(state.comprimento).replace(',', '.')),
-                profundidade: Number(String(state.profundidade).replace(',', '.')),
-            },
+        const largura = Number(String(state.largura).replace(',', '.'));
+        const comprimento = Number(String(state.comprimento).replace(',', '.'));
+        const profundidade = Number(String(state.profundidade).replace(',', '.'));
+        const payload = {
+            ut_id: user.id,
+            par_nome: `${state.tipo || 'Cultivo'} ${new Date().toLocaleDateString('pt-PT')}`,
+            par_estado: 'Saudavel',
+            largura,
+            comprimento,
+            profundidade,
             tipo: state.tipo,
             objetivo: state.objetivo,
             metodo: state.metodo,
-            createdAt: new Date().toISOString(),
         };
 
-        const key = 'cultivos';
-        const prevList = (() => {
-            try {
-                return JSON.parse(localStorage.getItem(key) || '[]');
-            } catch {
-                return [];
-            }
-        })();
-
-        const nextList = Array.isArray(prevList) ? [...prevList, cultivo] : [cultivo];
-        localStorage.setItem(key, JSON.stringify(nextList));
-        window.location.href = 'dashboard.html';
+        try {
+            setError('');
+            if (btnSave) btnSave.disabled = true;
+            await api.fetchJson('parcelas/adicionar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            window.location.href = 'dashboard.html';
+        } catch (error) {
+            setError(error.message || 'Nao foi possivel guardar o cultivo na base de dados.');
+        } finally {
+            if (btnSave) btnSave.disabled = false;
+        }
     };
 
     btnPrev?.addEventListener('click', (e) => {

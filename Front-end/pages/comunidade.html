@@ -1,35 +1,22 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunidade - CocoRoot</title>
     <link rel="stylesheet" href="../css/wireframe.css">
 </head>
+
 <body class="app-page">
-    
+
 
     <div class="page-content">
         <div class="page-title">Rede de Agricultores</div>
 
-        <div class="stats-row" aria-label="Estatísticas">
-            <div class="stat-item">
-                <span class="stat-num">7</span>
-                <span class="stat-label">Todos</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num">2</span>
-                <span class="stat-label">Dúvidas</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num">2</span>
-                <span class="stat-label">Dicas</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-num">3</span>
-                <span class="stat-label">Experiências</span>
-            </div>
-        </div>
+        <div id="community-error" class="dash-card" style="margin-bottom:16px;color:#8a1f11;" hidden></div>
+
+        <div id="community-stats" class="stats-row" aria-label="Estatísticas"></div>
 
         <div class="tabs" role="tablist" aria-label="Categorias">
             <button class="tab active" type="button" data-cat="todos">Todos</button>
@@ -38,54 +25,12 @@
             <button class="tab" type="button" data-cat="experiencias">Experiências</button>
         </div>
 
-        <div id="posts" style="display:flex;flex-direction:column;gap:12px;">
-            <a class="card" data-cat="duvidas" href="comunidade-post.html?id=1" style="text-decoration:none;color:inherit;display:block;">
-                <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
-                    <div style="font-weight:900;">Anno</div>
-                    <div style="color:var(--muted);font-size:13px;">14:45 · 5 minutos</div>
-                </div>
-                <div style="font-weight:900;font-size:16px;margin-bottom:6px;">Como controlar a humidade no substrato?</div>
-                <div style="color:var(--muted);line-height:1.6;">Estou a ter variações grandes ao longo do dia. Que rotina recomendam?</div>
-                <div class="post-badge">Dúvida</div>
-            </a>
-
-            <a class="card" data-cat="dicas" href="comunidade-post.html?id=2" style="text-decoration:none;color:inherit;display:block;">
-                <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
-                    <div style="font-weight:900;">Anno</div>
-                    <div style="color:var(--muted);font-size:13px;">13:10 · 3 minutos</div>
-                </div>
-                <div style="font-weight:900;font-size:16px;margin-bottom:6px;">Dica rápida para drenagem</div>
-                <div style="color:var(--muted);line-height:1.6;">Se a água fica acumulada, ajusta o escoamento antes de aumentar a rega.</div>
-                <div class="post-badge">Dica</div>
-            </a>
-
-            <a class="card" data-cat="experiencias" href="comunidade-post.html?id=3" style="text-decoration:none;color:inherit;display:block;">
-                <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
-                    <div style="font-weight:900;">Produtor</div>
-                    <div style="color:var(--muted);font-size:13px;">Ontem · 8 minutos</div>
-                </div>
-                <div style="font-weight:900;font-size:16px;margin-bottom:6px;">O que mudou na minha produção</div>
-                <div style="color:var(--muted);line-height:1.6;">Depois de registar parcelas e tarefas, fiquei mais consistente e reduzi perdas.</div>
-                <div class="post-badge">Experiência</div>
-            </a>
-        </div>
+        <div id="posts" style="display:flex;flex-direction:column;gap:12px;"></div>
     </div>
 
-    <script>
-        (function () {
-            const tabs = Array.from(document.querySelectorAll('.tab[data-cat]'));
-            const posts = Array.from(document.querySelectorAll('#posts [data-cat]'));
-            function setCat(cat) {
-                tabs.forEach((t) => t.classList.toggle('active', t.dataset.cat === cat));
-                posts.forEach((p) => {
-                    const show = cat === 'todos' || p.dataset.cat === cat;
-                    p.style.display = show ? 'block' : 'none';
-                });
-            }
-            tabs.forEach((t) => t.addEventListener('click', () => setCat(t.dataset.cat)));
-            setCat('todos');
-        })();
-    </script>
-<script src="../js/layout.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/comunidade.js"></script>
+    <script src="../js/layout.js"></script>
 </body>
+
 </html>
