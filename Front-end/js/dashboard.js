@@ -127,6 +127,202 @@ document.addEventListener('DOMContentLoaded', async () => {
         }).format(date);
     };
 
+    const formatShortDateTime = (value) => {
+        if (!value) return 'Sem data';
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return 'Sem data';
+        return new Intl.DateTimeFormat('pt-PT', {
+            day: '2-digit',
+            month: '2-digit',
+            year: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+        }).format(date);
+    };
+
+    const tasksStorageKey = 'cocoRootTasks';
+
+    const readTasksStore = () => {
+        try {
+            const raw = localStorage.getItem(tasksStorageKey);
+            return raw ? JSON.parse(raw) : {};
+        } catch {
+            return {};
+        }
+    };
+
+    const writeTasksStore = (store) => {
+        localStorage.setItem(tasksStorageKey, JSON.stringify(store || {}));
+    };
+
+    const normalizeText = (value) => String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    const getParcelaId = (parcela) => {
+        const id = parcela?.id ?? parcela?.par_id ?? parcela?.parcela_id ?? parcela?.parcelaId ?? parcela?.nome;
+        return String(id || '');
+    };
+
+    const getParcelaLabel = (parcela) => String(parcela?.nome || parcela?.par_nome || 'Parcela');
+
+    const getCultivoLabel = (parcela) => {
+        const cultivos = Array.isArray(parcela?.cultivos) ? parcela.cultivos : [];
+        const first = cultivos[0];
+        return String(first?.nome || parcela?.tipo || parcela?.cultivo || '');
+    };
+
+    const pickCultivoCategory = (cultivoName) => {
+        const t = normalizeText(cultivoName);
+        if (!t) return 'geral';
+        const has = (...words) => words.some((w) => t.includes(normalizeText(w)));
+        if (has('alface', 'couve', 'espinafre', 'rúcula', 'rucula', 'repolho')) return 'folhosas';
+        if (has('tomate', 'pimento', 'pepino', 'abobrinha', 'courgette', 'beringela', 'melancia', 'melao', 'melão', 'morango')) return 'frutiferas';
+        if (has('manjericão', 'manjericao', 'hortelã', 'hortela', 'salsa', 'coentros', 'alecrim', 'orégãos', 'oregãos', 'oregano', 'cebolinho')) return 'ervas';
+        if (has('batata', 'cenoura', 'beterraba', 'nabo', 'rabanete')) return 'raizes';
+        return 'geral';
+    };
+
+    const addDays = (date, days) => {
+        const d = new Date(date);
+        d.setDate(d.getDate() + Number(days || 0));
+        return d;
+    };
+
+    const startOfDay = (date) => {
+        const d = new Date(date);
+        d.setHours(0, 0, 0, 0);
+        return d;
+    };
+
+    const endOfDay = (date) => {
+        const d = new Date(date);
+        d.setHours(23, 59, 59, 999);
+        return d;
+    };
+
+    const buildTaskId = () => {
+        try {
+            if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+        } catch { }
+        return `t_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+    };
+
+    const generateTasksForParcela = (parcela, cultivoName) => {
+        const parcelaId = getParcelaId(parcela);
+        const parcelaNome = getParcelaLabel(parcela);
+        const cultivo = String(cultivoName || '').trim();
+        const category = pickCultivoCategory(cultivo);
+        const baseTitle = cultivo ? ` (${cultivo})` : '';
+        const today = startOfDay(new Date());
+
+        const make = (titulo, dueDate, kind) => ({
+            id: buildTaskId(),
+            titulo,
+            parcela_id: parcelaId,
+            parcela_nome: parcelaNome,
+            cultivo_nome: cultivo,
+            categoria: category,
+            tipo: kind || 'geral',
+            estado: 'Pendente',
+            data_inicio: new Date(dueDate).toISOString(),
+            created_at: new Date().toISOString(),
+        });
+
+        const tasks = [
+            make(`Verificar humidade e ajustar rega${baseTitle}`, today, 'rega'),
+            make(`Inspecionar pragas/doenças${baseTitle}`, addDays(today, 3), 'saude'),
+        ];
+
+        if (category === 'folhosas') {
+            tasks.push(make(`Verificar crescimento e desbaste${baseTitle}`, addDays(today, 2), 'maneio'));
+            tasks.push(make(`Adubação leve (se necessário)${baseTitle}`, addDays(today, 7), 'nutricao'));
+        } else if (category === 'frutiferas') {
+            tasks.push(make(`Verificar floração/frutificação${baseTitle}`, addDays(today, 2), 'maneio'));
+            tasks.push(make(`Apoiar/tutorar plantas (se aplicável)${baseTitle}`, addDays(today, 5), 'maneio'));
+            tasks.push(make(`Adubação (se necessário)${baseTitle}`, addDays(today, 10), 'nutricao'));
+        } else if (category === 'ervas') {
+            tasks.push(make(`Colheita seletiva e limpeza${baseTitle}`, addDays(today, 4), 'maneio'));
+            tasks.push(make(`Podar para estimular rebrote${baseTitle}`, addDays(today, 8), 'maneio'));
+        } else if (category === 'raizes') {
+            tasks.push(make(`Verificar solo e compactação${baseTitle}`, addDays(today, 2), 'maneio'));
+            tasks.push(make(`Rega profunda (se necessário)${baseTitle}`, addDays(today, 4), 'rega'));
+            tasks.push(make(`Adubação de manutenção${baseTitle}`, addDays(today, 9), 'nutricao'));
+        } else {
+            tasks.push(make(`Registar observações no painel${baseTitle}`, addDays(today, 1), 'registo'));
+            tasks.push(make(`Adubação (se necessário)${baseTitle}`, addDays(today, 8), 'nutricao'));
+        }
+
+        return tasks;
+    };
+
+    const mergeGeneratedTasks = (existingTasks, parcelas) => {
+        const list = Array.isArray(existingTasks) ? existingTasks.slice() : [];
+        const byKey = new Set(
+            list.map((t) => `${t.parcela_id || ''}::${normalizeText(t.titulo)}::${String(t.data_inicio || '').slice(0, 10)}`),
+        );
+
+        parcelas.forEach((parcela) => {
+            const cultivo = getCultivoLabel(parcela);
+            const generated = generateTasksForParcela(parcela, cultivo);
+            generated.forEach((t) => {
+                const key = `${t.parcela_id || ''}::${normalizeText(t.titulo)}::${String(t.data_inicio || '').slice(0, 10)}`;
+                if (byKey.has(key)) return;
+                byKey.add(key);
+                list.push(t);
+            });
+        });
+
+        return list;
+    };
+
+    const getUserTasks = (userId) => {
+        const store = readTasksStore();
+        const tasks = Array.isArray(store?.[userId]) ? store[userId] : [];
+        return { store, tasks };
+    };
+
+    const setUserTasks = (store, userId, tasks) => {
+        const next = { ...(store || {}) };
+        next[userId] = Array.isArray(tasks) ? tasks : [];
+        writeTasksStore(next);
+    };
+
+    const renderTasks = (tasks, options = {}) => {
+        if (!tarefasContainer) return;
+        const all = Array.isArray(tasks) ? tasks : [];
+        const showOnlyToday = options.onlyToday !== false;
+        const now = new Date();
+        const cutoff = endOfDay(now);
+
+        const isDone = (task) => String(task?.estado || '').toLowerCase().includes('conclu');
+        const due = (task) => new Date(task?.data_inicio || task?.dueDate || 0);
+
+        const visible = showOnlyToday
+            ? all.filter((t) => !isDone(t) && due(t).getTime() <= cutoff.getTime())
+            : all.filter((t) => !isDone(t));
+
+        visible.sort((a, b) => due(a).getTime() - due(b).getTime());
+
+        if (visible.length === 0) {
+            renderEmpty(tarefasContainer, 'Sem tarefas para hoje. Registe um cultivo para gerar tarefas automaticamente.');
+            return;
+        }
+
+        tarefasContainer.innerHTML = visible.map((tarefa) => {
+            const dueText = formatShortDateTime(tarefa.data_inicio);
+            return `
+                <button type="button" data-task-id="${String(tarefa.id || '')}" style="all:unset;cursor:pointer;display:block;">
+                    <div style="display:flex;align-items:flex-start;gap:10px;">
+                        <div class="check-box">•</div>
+                        <div>
+                            <div style="font-weight:900;">${tarefa.titulo || 'Tarefa'}</div>
+                            <div style="color:var(--muted);line-height:1.6;">${tarefa.parcela_nome || 'Sem parcela'} · Pendente · ${dueText}</div>
+                        </div>
+                    </div>
+                </button>
+            `;
+        }).join('');
+    };
+
     try {
         const [parcelasResponse, tarefasResponse, alertasResponse, clima] = await Promise.all([
             api.fetchJson(`parcelas/listar/${user.id}`),
@@ -136,11 +332,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         ]);
 
         const parcelas = Array.isArray(parcelasResponse?.data) ? parcelasResponse.data : [];
-        const tarefas = Array.isArray(tarefasResponse?.data) ? tarefasResponse.data : [];
+        const serverTarefas = Array.isArray(tarefasResponse?.data) ? tarefasResponse.data : [];
         const alertas = Array.isArray(alertasResponse?.data) ? alertasResponse.data : [];
 
         if (parcelasCount) parcelasCount.textContent = String(parcelas.length);
-        if (tarefasCount) tarefasCount.textContent = String(tarefas.length);
         if (alertasCount) alertasCount.textContent = String(alertas.length);
 
         if (parcelas.length === 0) {
@@ -160,18 +355,58 @@ document.addEventListener('DOMContentLoaded', async () => {
             }).join('');
         }
 
-        if (tarefas.length === 0) {
-            renderEmpty(tarefasContainer, 'Sem tarefas dinâmicas disponíveis no servidor atual.');
-        } else if (tarefasContainer) {
-            tarefasContainer.innerHTML = tarefas.map((tarefa) => `
-                <div style="display:flex;align-items:flex-start;gap:10px;">
-                    <div class="check-box">${String(tarefa.estado || '').toLowerCase().includes('conclu') ? '✓' : '•'}</div>
-                    <div>
-                        <div style="font-weight:900;">${tarefa.titulo || 'Tarefa'}</div>
-                        <div style="color:var(--muted);line-height:1.6;">${tarefa.parcela_nome || 'Sem parcela'} · ${tarefa.estado || 'Sem estado'} · ${formatDate(tarefa.data_inicio)}</div>
+        const userId = String(user.id ?? 'anon');
+        const hasServerTasks = serverTarefas.length > 0;
+        let tarefas = hasServerTasks ? serverTarefas : [];
+
+        if (!hasServerTasks) {
+            const { store, tasks } = getUserTasks(userId);
+            const merged = mergeGeneratedTasks(tasks, parcelas);
+            tarefas = merged;
+            setUserTasks(store, userId, merged);
+
+            if (tarefasContainer) {
+                if (!tarefasContainer.dataset.tasksBound) {
+                    tarefasContainer.dataset.tasksBound = '1';
+                    tarefasContainer.addEventListener('click', (e) => {
+                        const btn = e.target?.closest?.('[data-task-id]');
+                        const taskId = btn?.getAttribute?.('data-task-id');
+                        if (!taskId) return;
+                        const { store: currentStore, tasks: currentTasks } = getUserTasks(userId);
+                        const nextTasks = currentTasks.map((t) => {
+                            if (String(t.id) !== String(taskId)) return t;
+                            return { ...t, estado: 'Concluída', concluida_em: new Date().toISOString() };
+                        });
+                        setUserTasks(currentStore, userId, nextTasks);
+                        renderTasks(nextTasks, { onlyToday: true });
+                        if (tarefasCount) {
+                            const pending = nextTasks.filter((t) => !String(t?.estado || '').toLowerCase().includes('conclu')).length;
+                            tarefasCount.textContent = String(pending);
+                        }
+                    });
+                }
+            }
+        }
+
+        if (tarefasCount) {
+            const pending = tarefas.filter((t) => !String(t?.estado || '').toLowerCase().includes('conclu')).length;
+            tarefasCount.textContent = String(pending);
+        }
+
+        if (hasServerTasks) {
+            if (tarefasContainer) {
+                tarefasContainer.innerHTML = tarefas.map((tarefa) => `
+                    <div style="display:flex;align-items:flex-start;gap:10px;">
+                        <div class="check-box">${String(tarefa.estado || '').toLowerCase().includes('conclu') ? '✓' : '•'}</div>
+                        <div>
+                            <div style="font-weight:900;">${tarefa.titulo || 'Tarefa'}</div>
+                            <div style="color:var(--muted);line-height:1.6;">${tarefa.parcela_nome || 'Sem parcela'} · ${tarefa.estado || 'Sem estado'} · ${formatDate(tarefa.data_inicio)}</div>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
+        } else {
+            renderTasks(tarefas, { onlyToday: true });
         }
 
         if (monitorizacaoContainer) {
