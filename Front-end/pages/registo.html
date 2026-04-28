@@ -86,7 +86,13 @@
                     <div class="form-group">
                         <label for="password">Digite a sua palavra-passe</label>
                         <div class="auth-row">
-                            <input type="password" id="password" name="password" placeholder="********" required>
+                            <div class="input-wrap">
+                                <input type="password" id="password" name="password" placeholder="********" required>
+                                <button type="button" id="toggle-register-password" class="input-icon"
+                                    aria-label="Mostrar ou ocultar palavra-passe">
+                                    <i class="bi bi-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
                             <button type="button" class="auth-next next-step" aria-label="Próximo">
                                 <i class="bi bi-chevron-right" aria-hidden="true"></i>
                             </button>
@@ -100,8 +106,14 @@
                 <div class="register-step hidden" id="step-6">
                     <div class="form-group">
                         <label for="confirm_password">Confirme a sua palavra-passe</label>
-                        <input type="password" id="confirm_password" name="confirm_password" placeholder="********"
-                            required>
+                        <div class="input-wrap">
+                            <input type="password" id="confirm_password" name="confirm_password" placeholder="********"
+                                required>
+                            <button type="button" id="toggle-register-confirm-password" class="input-icon"
+                                aria-label="Mostrar ou ocultar confirmação da palavra-passe">
+                                <i class="bi bi-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
                         <div class="auth-progress" style="--p: 100%;">
                             <div class="auth-progress-fill"></div>
                         </div>
@@ -121,6 +133,10 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const backBtn = document.getElementById('register-back');
+                const regPasswordInput = document.getElementById('password');
+                const regConfirmPasswordInput = document.getElementById('confirm_password');
+                const toggleRegPasswordBtn = document.getElementById('toggle-register-password');
+                const toggleRegConfirmPasswordBtn = document.getElementById('toggle-register-confirm-password');
                 if (backBtn) {
                     backBtn.addEventListener('click', (e) => {
                         e.preventDefault();
@@ -142,6 +158,28 @@
                     e.preventDefault();
                     btn.click();
                 });
+
+                if (toggleRegPasswordBtn && regPasswordInput) {
+                    toggleRegPasswordBtn.addEventListener('click', () => {
+                        const isHidden = regPasswordInput.type === 'password';
+                        regPasswordInput.type = isHidden ? 'text' : 'password';
+                        const icon = toggleRegPasswordBtn.querySelector('i');
+                        if (icon) {
+                            icon.className = isHidden ? 'bi bi-eye-slash' : 'bi bi-eye';
+                        }
+                    });
+                }
+
+                if (toggleRegConfirmPasswordBtn && regConfirmPasswordInput) {
+                    toggleRegConfirmPasswordBtn.addEventListener('click', () => {
+                        const isHidden = regConfirmPasswordInput.type === 'password';
+                        regConfirmPasswordInput.type = isHidden ? 'text' : 'password';
+                        const icon = toggleRegConfirmPasswordBtn.querySelector('i');
+                        if (icon) {
+                            icon.className = isHidden ? 'bi bi-eye-slash' : 'bi bi-eye';
+                        }
+                    });
+                }
             });
         </script>
         <script src="../js/layout.js"></script>
