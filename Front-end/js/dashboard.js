@@ -632,16 +632,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                     : 'CocoRoot API';
                 const updatedAt = clima.atualizado_em || clima.updated_at || clima.time || null;
                 const updatedText = updatedAt ? formatShortDateTime(updatedAt) : '';
+                const temp = Number(clima.temperatura);
+                const tempDisplay = Number.isFinite(temp) ? `${Math.round(temp)}°C` : '—';
                 climaContainer.innerHTML = `
-                    <div class="dash-card">
-                        <div class="dash-card-title">Agora em ${clima.cidade || 'Lisboa'}</div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+                    <div class="dash-card" style="background:linear-gradient(180deg, rgba(47,143,61,0.92), rgba(42,126,54,0.92)); color: rgba(255,255,255,0.98); border-color: rgba(47,143,61,0.32);">
+                        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;">
                             <div>
-                                <div style="font-size:34px;font-weight:900;line-height:1;">${Math.round(Number(clima.temperatura || 0))}°C</div>
-                                <div style="color:var(--muted);margin-top:6px;">${clima.descricao || 'Sem descrição'} · Humidade ${clima.humidade ?? '—'}%</div>
-                                <div style="color:var(--muted);margin-top:6px;font-size:12px;">Fonte: ${fonte}${updatedText ? ` · Atualizado: ${updatedText}` : ''}</div>
+                                <div style="font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;opacity:0.92;">${clima.cidade || 'Lisboa'}</div>
+                                <div style="font-size:40px;font-weight:900;line-height:1;margin-top:8px;">${tempDisplay}</div>
+                                <div style="opacity:0.92;margin-top:8px;line-height:1.6;">${clima.descricao || 'Sem descrição'} · Humidade ${clima.humidade ?? '—'}%</div>
+                                <div style="opacity:0.86;margin-top:6px;font-size:12px;">Fonte: ${fonte}${updatedText ? ` · Atualizado: ${updatedText}` : ''}</div>
                             </div>
-                            <div style="color:var(--muted);line-height:1.8;">
+                            <div style="opacity:0.92;line-height:1.8;">
                                 Sensação: ${clima.sensacao_termica ?? '—'}°C<br>
                                 Mín: ${clima.temp_min ?? '—'}°C<br>
                                 Máx: ${clima.temp_max ?? '—'}°C
