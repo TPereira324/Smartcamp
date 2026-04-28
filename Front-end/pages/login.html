@@ -9,39 +9,35 @@
 </head>
 
 <body class="auth-page">
-    <div class="auth-img img-ph" style="overflow:hidden;padding:0;">
-
+    <div class="auth-img">
+        <a href="welcomeScreen.html" class="auth-back" aria-label="Voltar">&#8249;</a>
     </div>
 
     <div class="auth-form">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;">
-            <a href="principal.html" class="back-link">← Home</a>
-            <a href="registo.html" class="nav-btn">Criar Conta</a>
+        <div class="auth-form-card">
+            <div class="auth-form-header">
+                <img src="../image/logo.jpeg" alt="CocoRoot" class="auth-brand">
+                <h1 class="auth-form-title">Entrar</h1>
+                <p class="auth-form-subtitle">Aceda a sua conta e acompanhe os seus cultivos.</p>
+            </div>
+
+            <form id="login-form" action="../../Back-end/login.php" method="POST">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="Digite o seu e-mail" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                    <button type="button" id="toggle-login-password" class="btn"
+                        style="margin-top:10px;padding:10px 14px;width:100%;">Mostrar senha</button>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn full">Entrar</button>
+                    <a href="registo.html" class="btn outline full">Registar-me</a>
+                </div>
+            </form>
         </div>
-
-        <div class="auth-logo">
-            <span style="display:flex;align-items:center;gap:10px;">
-
-                <span>CocoRoot</span>
-            </span>
-        </div>
-
-        <form id="login-form" action="../../Back-end/login.php" method="POST">
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="Digite o seu e-mail" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-                <button type="button" id="toggle-login-password" class="btn"
-                    style="margin-top:10px;padding:10px 14px;width:100%;">Mostrar senha</button>
-            </div>
-            <div class="btn-group">
-                <button type="submit" class="btn full">Entrar</button>
-                <a href="registo.html" class="btn outline full">Registar-me</a>
-            </div>
-        </form>
     </div>
     <script src="../js/api.js"></script>
     <script src="../js/layout.js"></script>
