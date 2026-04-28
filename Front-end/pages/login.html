@@ -10,31 +10,35 @@
 
 <body class="auth-page">
     <div class="auth-img">
-        <a href="welcomeScreen.html" class="auth-back" aria-label="Voltar">&#8249;</a>
+        <a href="welcomeScreen.html" class="auth-back" aria-label="Voltar"><i class="bi bi-chevron-left" aria-hidden="true"></i></a>
     </div>
 
     <div class="auth-form">
         <div class="auth-form-card">
             <div class="auth-form-header">
                 <img src="../image/logo.jpeg" alt="CocoRoot" class="auth-brand">
-                <h1 class="auth-form-title">Entrar</h1>
-                <p class="auth-form-subtitle">Aceda a sua conta e acompanhe os seus cultivos.</p>
             </div>
 
             <form id="login-form" action="../../Back-end/login.php" method="POST">
                 <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="Digite o seu e-mail" required>
+                    <label for="email">Digite o seu e-mail</label>
+                    <input type="email" id="email" name="email" placeholder="Ex: maria123@gmail.com" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-                    <button type="button" id="toggle-login-password" class="btn"
-                        style="margin-top:10px;padding:10px 14px;width:100%;">Mostrar senha</button>
+                    <label for="password">Digite a sua palavra-passe</label>
+                    <div class="input-wrap">
+                        <input type="password" id="password" name="password" placeholder="********" required>
+                        <button type="button" id="toggle-login-password" class="input-icon"
+                            aria-label="Mostrar ou ocultar palavra-passe">
+                            <i class="bi bi-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="btn-group">
                     <button type="submit" class="btn full">Entrar</button>
-                    <a href="registo.html" class="btn outline full">Registar-me</a>
+                </div>
+                <div class="auth-alt">
+                    Ainda não tem conta? <a href="registo.html">Registar-me</a>
                 </div>
             </form>
         </div>
@@ -44,11 +48,14 @@
     <script>
         const loginPasswordInput = document.getElementById('password');
         const toggleLoginPasswordBtn = document.getElementById('toggle-login-password');
+        const toggleLoginPasswordIcon = toggleLoginPasswordBtn ? toggleLoginPasswordBtn.querySelector('i') : null;
         if (toggleLoginPasswordBtn && loginPasswordInput) {
             toggleLoginPasswordBtn.addEventListener('click', () => {
                 const isHidden = loginPasswordInput.type === 'password';
                 loginPasswordInput.type = isHidden ? 'text' : 'password';
-                toggleLoginPasswordBtn.textContent = isHidden ? 'Ocultar senha' : 'Mostrar senha';
+                if (toggleLoginPasswordIcon) {
+                    toggleLoginPasswordIcon.className = isHidden ? 'bi bi-eye-slash' : 'bi bi-eye';
+                }
             });
         }
 

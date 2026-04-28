@@ -50,10 +50,14 @@
         display: none;
     }
 
+    body.auth-page {
+        padding: 14px;
+    }
+
     .auth-form {
         width: 100%;
-        border-left: none;
         padding: 44px 18px;
+        min-height: calc(100vh - 28px);
     }
 }
 

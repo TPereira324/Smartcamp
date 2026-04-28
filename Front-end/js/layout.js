@@ -1,13 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     const currentPath = window.location.pathname.split('/').pop() || 'principal.html';
     const user = JSON.parse(localStorage.getItem('user'));
+    const isInPages = window.location.pathname.includes('/pages/');
+    const assetPrefix = isInPages ? '../' : '';
 
     const headerHTML = `
     <nav class="nav">
         <a href="principal.html" class="nav-logo" aria-label="CocoRoot">
-            <span style="display:flex;align-items:center;gap:10px;">
-                <span>CocoRoot</span>
-            </span>
+            <img src="${assetPrefix}image/logo.jpeg" alt="" class="nav-brand">
+            <span class="nav-title">CocoRoot</span>
         </a>
         <div class="nav-links">
             <a href="noticias.html" class="nav-link ${currentPath.includes('noticias') || currentPath.includes('post') ? 'active' : ''}">Notícias</a>
@@ -15,15 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
             <a href="comunidade.html" class="nav-link ${currentPath.includes('comunidade') ? 'active' : ''}">Comunidade</a>
             <a href="comecar.html" class="nav-link ${currentPath.includes('comecar') ? 'active' : ''}">Guia</a>
             <a href="sobre.html" class="nav-link ${currentPath.includes('sobre') ? 'active' : ''}">Sobre nós</a>
-            ${user && user.role === 'admin' ? '<a href="dashboard.html?admin=true" class="nav-link" style="color:var(--primary);font-weight:900;">Admin</a>' : ''}
+            ${user && user.role === 'admin' ? '<a href="dashboard.html?admin=true" class="nav-link active">Admin</a>' : ''}
         </div>
         <div class="nav-right">
             ${user ? `
-                <span class="nav-user-info" style="font-size:13px;color:var(--muted);margin-right:10px;">${user.nome}</span>
-                <a href="#" id="logout-btn" class="nav-link" style="font-weight:800;color:red;margin-right:10px;">Sair</a>
+                <span class="nav-user-info">${user.nome}</span>
+                <a href="#" id="logout-btn" class="nav-link nav-logout"><i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair</a>
             ` : `
-                <a href="login.html" class="nav-btn">Entrar</a>
-                <a href="registo.html" class="nav-btn">Criar Conta</a>
+                <a href="login.html" class="nav-btn"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> Entrar</a>
+                <a href="registo.html" class="nav-btn"><i class="bi bi-person-plus" aria-hidden="true"></i> Criar Conta</a>
             `}
         </div>
     </nav>
@@ -33,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
     <footer class="footer" style="margin-top: auto;">
         <div class="footer-logo">
             <span style="display:flex;align-items:center;gap:10px;">
-                <span>CocoRoot</span>
+                <img src="${assetPrefix}image/logo.jpeg" alt="" class="nav-brand">
+                <span class="nav-title">CocoRoot</span>
             </span>
         </div>
         <div class="footer-links">
