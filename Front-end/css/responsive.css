@@ -15,9 +15,7 @@
     }
 
     .hero {
-        flex-direction: column;
         padding: 44px 18px;
-        gap: 22px;
     }
 
     .section {

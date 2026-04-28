@@ -31,34 +31,38 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     const footerHTML = `
-    <footer class="footer" style="margin-top: auto;">
-        <div class="footer-logo">
-            <span style="display:flex;align-items:center;gap:10px;">
-                <img src="${assetPrefix}image/logo.jpeg" alt="" class="nav-brand">
-                <span class="nav-title">CocoRoot</span>
-            </span>
-        </div>
-        <div class="footer-links">
-            <div class="footer-col">
-                <div style="font-weight:800;margin-bottom:6px;">Produto</div>
-                <a href="comecar.html" style="text-decoration:none;color:var(--muted);">Guias</a>
-                <a href="principal.html#funcionalidades" style="text-decoration:none;color:var(--muted);">Funcionalidades</a>
-                <a href="principal.html#como-funciona" style="text-decoration:none;color:var(--muted);">Como funciona</a>
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand">
+                    <img src="${assetPrefix}image/logo.jpeg" alt="" class="nav-brand">
+                    <div class="footer-brand-name">CocoRoot</div>
+                </div>
             </div>
-            <div class="footer-col">
-                <div style="font-weight:800;margin-bottom:6px;">Empresa</div>
-                <a href="sobre.html" style="text-decoration:none;color:var(--muted);">Sobre nós</a>
-                <a href="dashboard.html" style="text-decoration:none;color:var(--muted);">Dashboard</a>
+            <div>
+                <div class="footer-col-title">Produto</div>
+                <div class="footer-links">
+                    <a href="comecar.html">Começar do zero</a>
+                    <a href="principal.html#funcionalidades">Funcionalidades</a>
+                    <a href="principal.html#como-funciona">Como funciona</a>
+                </div>
             </div>
-            <div class="footer-col">
-                <div style="font-weight:800;margin-bottom:6px;">Legal</div>
-                <a href="#" style="text-decoration:none;color:var(--muted);">Privacidade</a>
-                <a href="#" style="text-decoration:none;color:var(--muted);">Termos</a>
-                <a href="#" style="text-decoration:none;color:var(--muted);">Cookies</a>
+            <div>
+                <div class="footer-col-title">Contacto</div>
+                <div class="footer-links">
+                    <a href="mailto:contacto@cocoroot.pt">contacto@cocoroot.pt</a>
+                    <a href="sobre.html">Sobre nós</a>
+                    <a href="dashboard.html">Dashboard</a>
+                </div>
             </div>
-        </div>
-        <div class="footer-actions">
-            ${user ? '' : '<a href="login.html" class="btn">Entrar</a>'}
+            <div>
+                <div class="footer-col-title">Redes sociais</div>
+                <div class="footer-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">YouTube</a>
+                </div>
+            </div>
         </div>
     </footer>
     `;
