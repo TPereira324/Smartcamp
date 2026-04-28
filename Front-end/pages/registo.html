@@ -10,93 +10,104 @@
 
 <body class="auth-page">
     <div class="auth-img">
-        <a href="welcomeScreen.html" class="auth-back" aria-label="Voltar"><i class="bi bi-chevron-left" aria-hidden="true"></i></a>
+        <a href="#" id="register-back" class="auth-back" aria-label="Voltar"><i class="bi bi-chevron-left" aria-hidden="true"></i></a>
     </div>
 
     <div class="auth-form">
         <div class="auth-form-card">
             <div class="auth-form-header">
                 <img src="../image/logo.jpeg" alt="CocoRoot" class="auth-brand">
-                <h1 class="auth-form-title">Registar</h1>
-                <p class="auth-form-subtitle">Crie a sua conta para gerir a sua produção com a CocoRoot.</p>
             </div>
 
             <form id="register-form" action="../../Back-end/registrar.php" method="POST">
                 <div class="register-step" id="step-1">
                     <div class="form-group">
-                        <label for="fullname">Nome completo</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="Digite o seu nome completo"
-                            required>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn full next-step">Próximo</button>
-                        <a href="welcomeScreen.html" class="btn outline full">Voltar</a>
+                        <label for="fullname">Digite o seu nome completo</label>
+                        <div class="auth-row">
+                            <input type="text" id="fullname" name="fullname" placeholder="Ex: Maria Viegas" required>
+                            <button type="button" class="auth-next next-step" aria-label="Próximo">
+                                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="auth-progress" style="--p: 16.6%;">
+                            <div class="auth-progress-fill"></div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="register-step hidden" id="step-2">
                     <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" name="email" placeholder="Digite o seu e-mail" required>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn full next-step">Próximo</button>
-                        <button type="button" class="btn full prev-step">Anterior</button>
+                        <label for="email">Digite o seu e-mail</label>
+                        <div class="auth-row">
+                            <input type="email" id="email" name="email" placeholder="Ex: maria123@gmail.com" required>
+                            <button type="button" class="auth-next next-step" aria-label="Próximo">
+                                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="auth-progress" style="--p: 33.3%;">
+                            <div class="auth-progress-fill"></div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="register-step hidden" id="step-3">
                     <div class="form-group">
-                        <label for="country_code">Região / Código do país</label>
-                        <select id="country_code" name="country_code" class="btn"
-                            style="width:100%;text-align:left;letter-spacing:1px;text-transform:none;font-weight:bold;"
-                            required>
-                            <option value="+351" selected>Portugal (+351)</option>
-                        </select>
-                        <small id="country-error" style="color:red;display:none;">Selecione o código do país.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Número de telefone (9 dígitos)</label>
-                        <input type="tel" id="phone" name="phone" placeholder="Ex: 912345678" inputmode="numeric"
-                            required pattern="^[0-9]{9}$" title="O número deve ter exatamente 9 dígitos.">
-                        <small id="phone-error" style="color:red;display:none;">Número inválido. Deve ter exatamente 9
-                            dígitos.</small>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn full next-step">Próximo</button>
-                        <button type="button" class="btn full prev-step">Anterior</button>
+                        <label for="phone">Digite o seu número de telefone</label>
+                        <input type="hidden" id="country_code" name="country_code" value="+351">
+                        <div class="auth-row">
+                            <input type="tel" id="phone" name="phone" placeholder="Ex: 912345678" inputmode="numeric"
+                                required pattern="^[0-9]{9}$" title="O número deve ter exatamente 9 dígitos.">
+                            <button type="button" class="auth-next next-step" aria-label="Próximo">
+                                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="auth-progress" style="--p: 50%;">
+                            <div class="auth-progress-fill"></div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="register-step hidden" id="step-4">
                     <div class="form-group">
-                        <label for="farm_name">Nome da sua fazenda</label>
-                        <input type="text" id="farm_name" name="farm_name" placeholder="Digite o nome da sua fazenda"
-                            required>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn full next-step">Próximo</button>
-                        <button type="button" class="btn full prev-step">Anterior</button>
+                        <label for="farm_name">Digite o nome da sua fazenda</label>
+                        <div class="auth-row">
+                            <input type="text" id="farm_name" name="farm_name" placeholder="Ex: Quinta do Vale" required>
+                            <button type="button" class="auth-next next-step" aria-label="Próximo">
+                                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="auth-progress" style="--p: 66.6%;">
+                            <div class="auth-progress-fill"></div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="register-step hidden" id="step-5">
                     <div class="form-group">
-                        <label for="password">Senha</label>
-                        <input type="password" id="password" name="password" placeholder="Crie uma senha" required>
-                        <button type="button" id="toggle-register-password" class="btn"
-                            style="margin-top:10px;padding:10px 14px;width:100%;">Mostrar senha</button>
+                        <label for="password">Digite a sua palavra-passe</label>
+                        <div class="auth-row">
+                            <input type="password" id="password" name="password" placeholder="********" required>
+                            <button type="button" class="auth-next next-step" aria-label="Próximo">
+                                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="auth-progress" style="--p: 83.3%;">
+                            <div class="auth-progress-fill"></div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="register-step hidden" id="step-6">
                     <div class="form-group">
-                        <label for="confirm_password">Confirmar senha</label>
-                        <input type="password" id="confirm_password" name="confirm_password"
-                            placeholder="Confirme sua senha" required>
-                        <button type="button" id="toggle-register-confirm-password" class="btn"
-                            style="margin-top:10px;padding:10px 14px;width:100%;">Mostrar confirmação</button>
+                        <label for="confirm_password">Confirme a sua palavra-passe</label>
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="********"
+                            required>
+                        <div class="auth-progress" style="--p: 100%;">
+                            <div class="auth-progress-fill"></div>
+                        </div>
                     </div>
-                    <div class="btn-group">
-                        <button type="submit" class="btn full">Finalizar Cadastro</button>
-                        <button type="button" class="btn full prev-step">Anterior</button>
+                    <div class="auth-submit">
+                        <button type="submit" class="btn full">Registar-me</button>
                     </div>
                 </div>
             </form>
@@ -106,79 +117,33 @@
         <script src="../js/models/utilizadorModel.js"></script>
         <script src="../js/views/utilizadorView.js"></script>
         <script src="../js/controllers/utilizadorController.js"></script>
+        <script src="../js/load.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                const countryCode = document.getElementById('country_code');
-                const countryError = document.getElementById('country-error');
-                const phoneInput = document.getElementById('phone');
-                const phoneError = document.getElementById('phone-error');
-                const nextBtn = document.querySelector('#step-3 .next-step');
-                const regPasswordInput = document.getElementById('password');
-                const regConfirmPasswordInput = document.getElementById('confirm_password');
-                const toggleRegPasswordBtn = document.getElementById('toggle-register-password');
-                const toggleRegConfirmPasswordBtn = document.getElementById('toggle-register-confirm-password');
-
-                if (nextBtn && phoneInput && countryCode) {
-                    nextBtn.addEventListener('click', (e) => {
-                        const phone = (phoneInput.value || '').trim();
-                        const code = (countryCode.value || '').trim();
-                        const validPhonePattern = /^[0-9]{9}$/;
-
-                        if (!code) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            if (countryError) countryError.style.display = 'block';
-                            countryCode.style.borderColor = 'red';
-                            countryCode.focus();
-                            return false;
-                        }
-
-                        if (!validPhonePattern.test(phone)) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            if (phoneError) phoneError.style.display = 'block';
-                            phoneInput.style.borderColor = 'red';
-                            return false;
+                const backBtn = document.getElementById('register-back');
+                if (backBtn) {
+                    backBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const controller = window.CocoRootRegister && window.CocoRootRegister.controller;
+                        if (controller && controller.currentStep && controller.currentStep > 1) {
+                            controller.prevStep();
                         } else {
-                            if (phoneError) phoneError.style.display = 'none';
-                            phoneInput.style.borderColor = '';
-                            if (countryError) countryError.style.display = 'none';
-                            countryCode.style.borderColor = '';
+                            window.location.href = 'welcomeScreen.html';
                         }
                     });
                 }
 
-                if (phoneInput) {
-                    phoneInput.addEventListener('input', () => {
-                        if (phoneError) phoneError.style.display = 'none';
-                        phoneInput.style.borderColor = '';
-                    });
-                }
-                if (countryCode) {
-                    countryCode.addEventListener('change', () => {
-                        if (countryError) countryError.style.display = 'none';
-                        countryCode.style.borderColor = '';
-                    });
-                }
-
-                if (toggleRegPasswordBtn && regPasswordInput) {
-                    toggleRegPasswordBtn.addEventListener('click', () => {
-                        const isHidden = regPasswordInput.type === 'password';
-                        regPasswordInput.type = isHidden ? 'text' : 'password';
-                        toggleRegPasswordBtn.textContent = isHidden ? 'Ocultar senha' : 'Mostrar senha';
-                    });
-                }
-
-                if (toggleRegConfirmPasswordBtn && regConfirmPasswordInput) {
-                    toggleRegConfirmPasswordBtn.addEventListener('click', () => {
-                        const isHidden = regConfirmPasswordInput.type === 'password';
-                        regConfirmPasswordInput.type = isHidden ? 'text' : 'password';
-                        toggleRegConfirmPasswordBtn.textContent = isHidden ? 'Ocultar confirmação' : 'Mostrar confirmação';
-                    });
-                }
+                document.addEventListener('keydown', (e) => {
+                    if (e.key !== 'Enter') return;
+                    const controller = window.CocoRootRegister && window.CocoRootRegister.controller;
+                    if (!controller || controller.currentStep >= controller.maxStep) return;
+                    const btn = document.querySelector(`#step-${controller.currentStep} .next-step`);
+                    if (!btn) return;
+                    e.preventDefault();
+                    btn.click();
+                });
             });
         </script>
-        <script src="../js/load.js"></script>
         <script src="../js/layout.js"></script>
 </body>
 

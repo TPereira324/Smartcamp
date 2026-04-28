@@ -3,7 +3,7 @@ class UtilizadorController {
         this.model = model;
         this.view = view;
         this.currentStep = 1;
-        this.maxStep = 5;
+        this.maxStep = 6;
     }
 
     init() {
