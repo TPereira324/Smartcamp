@@ -1,0 +1,244 @@
+/* Home / marketing */
+body.home-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.hero {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    padding: 72px 80px;
+    border-bottom: 1px solid rgba(47, 111, 59, 0.14);
+    min-height: 62vh;
+}
+
+.hero-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.hero-img {
+    flex: 1;
+    min-height: 360px;
+    border-radius: var(--radius);
+    background-image: url('../image/planta.jpeg');
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(47, 111, 59, 0.14);
+    box-shadow: var(--shadow);
+}
+
+.section {
+    padding: 60px 80px;
+    border-bottom: 1px solid rgba(47, 111, 59, 0.14);
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    border-bottom: 3px solid rgba(31, 60, 19, 0.16);
+    padding-bottom: 12px;
+    display: inline-block;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    border: var(--border);
+    padding: 16px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.card-img {
+    height: 80px;
+    margin-bottom: 14px;
+}
+
+.card-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.steps-row {
+    display: flex;
+    gap: 0;
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    padding: 28px 20px;
+    border-right: 2px solid #e0e0e0;
+}
+
+.step:last-child {
+    border-right: none;
+}
+
+.step-num {
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(27, 27, 27, 0.14);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 16px;
+    margin: 0 auto 16px;
+    background: rgba(47, 143, 61, 0.14);
+    color: rgba(27, 27, 27, 0.88);
+}
+
+.step-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.step-lines .txt-line {
+    background: #bbb;
+}
+
+.porque {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.porque-left {
+    flex: 1;
+}
+
+.porque-right {
+    flex: 1;
+    min-height: 320px;
+    border-radius: var(--radius);
+    background-image: url('../image/planta.jpeg');
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(47, 111, 59, 0.14);
+    box-shadow: var(--shadow);
+}
+
+.checklist {
+    list-style: none;
+    margin-bottom: 32px;
+}
+
+.checklist li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.check-box {
+    width: 22px;
+    height: 22px;
+    border: 1px solid rgba(27, 27, 27, 0.14);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 8px;
+    background: rgba(47, 143, 61, 0.12);
+    color: rgba(27, 27, 27, 0.86);
+}
+
+.check-line {
+    height: 3px;
+    background: #999;
+    border-radius: 2px;
+    flex: 1;
+}
+
+.cta-section {
+    text-align: center;
+    padding: 72px 80px;
+    border-bottom: 1px solid rgba(47, 111, 59, 0.14);
+    background: rgba(245, 252, 245, 0.92);
+}
+
+.cta-title {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 36px;
+    text-transform: uppercase;
+}
+
+.cta-btns {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 28px 80px;
+    border-top: 1px solid rgba(27, 27, 27, 0.12);
+    margin-top: auto;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(12px);
+}
+
+.footer-logo {
+    font-weight: 800;
+    border: 1px solid rgba(27, 27, 27, 0.16);
+    padding: 6px 14px;
+    letter-spacing: 0.2px;
+    font-size: 14px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.06);
+}
+
+.footer-links {
+    display: flex;
+    gap: 40px;
+    flex: 1;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.footer-col .txt-line {
+    background: #bbb;
+}
+
+.footer-actions {
+    margin-left: auto;
+}

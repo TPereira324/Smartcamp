@@ -1,0 +1,51 @@
+/* Guide detail */
+.dica-box {
+    border: 1px solid rgba(27, 27, 27, 0.12);
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: var(--shadow);
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 12px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 18px;
+}
+
+.back-link {
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 16px;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-decoration: none;
+    color: rgba(27, 27, 27, 0.88);
+    border: 1px solid rgba(47, 143, 61, 0.40);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: none;
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.back-link:hover {
+    transform: translateY(-1px);
+    background: rgba(47, 143, 61, 0.10);
+    border-color: rgba(47, 143, 61, 0.48);
+    color: rgba(27, 27, 27, 0.92);
+    box-shadow: none;
+}
+
+.modulo-img {
+    width: 100%;
+    height: 280px;
+    margin-bottom: 28px;
+}
+
+.step-checklist {
+    list-style: none;
+}

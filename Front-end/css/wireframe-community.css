@@ -1,0 +1,149 @@
+/* Community */
+.stats-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 28px;
+    border: 1px solid rgba(47, 111, 59, 0.14);
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+.stat-item {
+    flex: 1;
+    padding: 16px 12px;
+    text-align: center;
+    border-right: 1px solid rgba(47, 111, 59, 0.14);
+}
+
+.stat-item:last-child { border-right: none; }
+.stat-num { font-size: 28px; font-weight: 900; display: block; margin-bottom: 4px; }
+.stat-label { font-size: 10px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+    padding: 8px;
+    border-radius: 14px;
+    border: 1px solid rgba(47, 111, 59, 0.14);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+.tab {
+    padding: 10px 16px;
+    border: 1px solid rgba(47, 111, 59, 0.18);
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    background: rgba(255, 255, 255, 0.92);
+    color: rgba(27, 27, 27, 0.86);
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.tab.active {
+    background: rgba(47, 143, 61, 0.14);
+    color: rgba(27, 27, 27, 0.92);
+    border-color: rgba(47, 143, 61, 0.34);
+}
+
+.post-list { display: flex; flex-direction: column; }
+
+.post-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.post-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(27, 27, 27, 0.24);
+    flex-shrink: 0;
+    margin-top: 2px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.92);
+}
+
+.post-content { flex: 1; }
+.post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.post-user { font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+.post-time { font-size: 11px; color: #888; }
+.post-title-lines { display: flex; flex-direction: column; gap: 6px; }
+
+.post-badge {
+    font-size: 11px;
+    border: 1px solid rgba(47, 111, 59, 0.18);
+    padding: 4px 10px;
+    color: rgba(27, 27, 27, 0.70);
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    align-self: flex-start;
+    margin-top: 8px;
+    border-radius: 999px;
+    background: rgba(47, 143, 61, 0.10);
+}
+
+.post-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.post-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.respostas-title {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 8px;
+}
+
+.resposta-item { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid #e0e0e0; }
+.resposta-avatar { width: 36px; height: 36px; border: 2px solid #222; border-radius: 50%; flex-shrink: 0; }
+.resposta-lines { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+
+.reply-form { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+
+.reply-form label {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #555;
+}
+
+.reply-form textarea {
+    width: 100%;
+    border: 3px solid #222;
+    padding: 12px;
+    font-size: 14px;
+    background: none;
+    height: 100px;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+}
+
+.reply-form textarea:focus { background: #fafafa; }
+.reply-submit { align-self: flex-end; }
