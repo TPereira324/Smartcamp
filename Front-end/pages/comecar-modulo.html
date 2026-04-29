@@ -48,7 +48,7 @@
             const user = JSON.parse(localStorage.getItem('user'));
             const params = new URLSearchParams(window.location.search);
             const mod = parseInt(params.get('mod') || '1', 10);
-            let completedModules = JSON.parse(localStorage.getItem('completedModules') || '[]');
+            const completedKey = 'cocoRootCompletedModules';
             const progressKey = 'cocoRootModuleProgress';
 
             if (!user) {
@@ -63,6 +63,21 @@
                 `;
                 return;
             }
+
+            const userId = String(user.id ?? 'anon');
+            const readCompletedStore = () => {
+                try {
+                    const raw = localStorage.getItem(completedKey);
+                    return raw ? JSON.parse(raw) : {};
+                } catch {
+                    return {};
+                }
+            };
+            const writeCompletedStore = (store) => {
+                localStorage.setItem(completedKey, JSON.stringify(store || {}));
+            };
+            const completedStore = readCompletedStore();
+            let completedModules = Array.isArray(completedStore[userId]) ? completedStore[userId] : [];
 
             if (mod > 1 && !completedModules.includes(mod - 1)) {
                 alert('Precisa de concluir o módulo anterior primeiro.');
@@ -167,7 +182,6 @@
                 localStorage.setItem(progressKey, JSON.stringify(store || {}));
             };
 
-            const userId = String(user.id ?? 'anon');
             const store = readProgressStore();
             const userProgress = (store[userId] && typeof store[userId] === 'object') ? store[userId] : {};
             const totalSteps = Array.isArray(current.steps) ? current.steps.length : 0;
@@ -296,10 +310,11 @@
                     alert('Conclua todos os passos antes de finalizar o módulo.');
                     return;
                 }
-                const completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
+                const completed = Array.isArray(completedStore[userId]) ? [...completedStore[userId]] : [];
                 if (!completed.includes(mod)) {
                     completed.push(mod);
-                    localStorage.setItem('completedModules', JSON.stringify(completed));
+                    completedStore[userId] = completed;
+                    writeCompletedStore(completedStore);
                 }
                 completedModules = completed;
 

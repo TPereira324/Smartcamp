@@ -44,7 +44,20 @@
         <script>
             (function () {
                 const user = JSON.parse(localStorage.getItem('user'));
-                const completedModules = JSON.parse(localStorage.getItem('completedModules') || '[]');
+                const completedKey = 'cocoRootCompletedModules';
+                const readCompletedStore = () => {
+                    try {
+                        const raw = localStorage.getItem(completedKey);
+                        return raw ? JSON.parse(raw) : {};
+                    } catch {
+                        return {};
+                    }
+                };
+                const userId = user?.id != null ? String(user.id) : null;
+                const completedStore = readCompletedStore();
+                const completedModules = userId && Array.isArray(completedStore[userId])
+                    ? completedStore[userId]
+                    : [];
                 const modules = {
                     1: { title: 'Introdução', status: 'Em curso' },
                     2: { title: 'Preparação do Substrato', status: 'Em breve' },
@@ -58,6 +71,9 @@
                 if (!user) {
                     const notice = document.getElementById('login-notice');
                     if (notice) notice.hidden = false;
+                } else {
+                    const notice = document.getElementById('login-notice');
+                    if (notice) notice.hidden = true;
                 }
 
                 const grid = document.getElementById('modules-grid');
