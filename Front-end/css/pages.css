@@ -107,6 +107,24 @@ body.app-page {
     box-shadow: 0 14px 26px rgba(0, 0, 0, 0.06);
 }
 
+.article-heart button {
+    all: unset;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.article-heart i {
+    font-size: 18px;
+    color: rgba(27, 27, 27, 0.78);
+}
+
+.article-heart.is-liked i {
+    color: rgba(190, 30, 30, 0.92);
+}
+
 .detalhe-actions {
     display: flex;
     justify-content: flex-end;
@@ -244,4 +262,3 @@ body.app-page {
     gap: 6px;
     flex: 1;
 }
-

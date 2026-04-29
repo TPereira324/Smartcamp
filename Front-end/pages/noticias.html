@@ -31,7 +31,7 @@
                         <span>8 min</span>
                     </div>
                 </div>
-                <div class="article-heart" aria-hidden="true">♡</div>
+                <div class="article-heart" data-id="1"><button type="button" aria-label="Favoritar"><i class="bi bi-heart" aria-hidden="true"></i></button></div>
             </a>
 
             <a class="article-item" href="post.html?id=2" style="text-decoration:none;color:inherit;">
@@ -45,7 +45,7 @@
                         <span>5 min</span>
                     </div>
                 </div>
-                <div class="article-heart" aria-hidden="true">♡</div>
+                <div class="article-heart" data-id="2"><button type="button" aria-label="Favoritar"><i class="bi bi-heart" aria-hidden="true"></i></button></div>
             </a>
 
             <a class="article-item" href="post.html?id=3" style="text-decoration:none;color:inherit;">
@@ -59,7 +59,7 @@
                         <span>6 min</span>
                     </div>
                 </div>
-                <div class="article-heart" aria-hidden="true">♡</div>
+                <div class="article-heart" data-id="3"><button type="button" aria-label="Favoritar"><i class="bi bi-heart" aria-hidden="true"></i></button></div>
             </a>
 
             <a class="article-item" href="post.html?id=4" style="text-decoration:none;color:inherit;">
@@ -73,10 +73,55 @@
                         <span>7 min</span>
                     </div>
                 </div>
-                <div class="article-heart" aria-hidden="true">♡</div>
+                <div class="article-heart" data-id="4"><button type="button" aria-label="Favoritar"><i class="bi bi-heart" aria-hidden="true"></i></button></div>
             </a>
         </div>
     </div>
 <script src="../js/layout.js"></script>
+    <script>
+        (function () {
+            const key = 'cocoRootFavorites';
+            const read = () => {
+                try {
+                    const raw = localStorage.getItem(key);
+                    return raw ? JSON.parse(raw) : [];
+                } catch {
+                    return [];
+                }
+            };
+            const write = (list) => localStorage.setItem(key, JSON.stringify(list || []));
+            const favorites = new Set(read().map(String));
+
+            const items = Array.from(document.querySelectorAll('.article-heart[data-id]'));
+            items.forEach((root) => {
+                const id = String(root.getAttribute('data-id') || '');
+                if (!id) return;
+                const btn = root.querySelector('button');
+                const icon = root.querySelector('i');
+                const sync = () => {
+                    const liked = favorites.has(id);
+                    root.classList.toggle('is-liked', liked);
+                    if (icon) icon.className = liked ? 'bi bi-heart-fill' : 'bi bi-heart';
+                    if (btn) btn.setAttribute('aria-label', liked ? 'Remover dos favoritos' : 'Adicionar aos favoritos');
+                };
+                sync();
+                if (btn) {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (favorites.has(id)) {
+                            favorites.delete(id);
+                            window.CocoRootToast && window.CocoRootToast('Favoritos', 'Removido dos favoritos');
+                        } else {
+                            favorites.add(id);
+                            window.CocoRootToast && window.CocoRootToast('Favoritos', 'Adicionado aos favoritos');
+                        }
+                        write(Array.from(favorites));
+                        sync();
+                    });
+                }
+            });
+        })();
+    </script>
 </body>
 </html>

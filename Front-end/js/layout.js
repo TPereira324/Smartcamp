@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const headerHTML = `
     <nav class="nav">
+        <a href="#" class="nav-back" aria-label="Voltar"><i class="bi bi-chevron-left" aria-hidden="true"></i></a>
         <a href="principal.html" class="nav-logo" aria-label="CocoRoot">
             <img src="${assetPrefix}image/logo.jpeg" alt="" class="nav-brand">
             <span class="nav-title">CocoRoot</span>
@@ -92,4 +93,45 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = 'principal.html';
         });
     }
+
+    const backBtn = document.querySelector('.nav-back');
+    if (backBtn) {
+        const hideBack = currentPath.includes('principal') || currentPath === 'index.html';
+        backBtn.style.display = hideBack ? 'none' : 'grid';
+        backBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (window.history.length > 1) {
+                window.history.back();
+                return;
+            }
+            window.location.href = 'principal.html';
+        });
+    }
+
+    const ensureToastRoot = () => {
+        let root = document.querySelector('.toast-root');
+        if (!root) {
+            root = document.createElement('div');
+            root.className = 'toast-root';
+            root.setAttribute('aria-live', 'polite');
+            document.body.appendChild(root);
+        }
+        return root;
+    };
+
+    window.CocoRootToast = (title, text) => {
+        const root = ensureToastRoot();
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `
+            <div class="toast-icon"><i class="bi bi-bell" aria-hidden="true"></i></div>
+            <div style="flex:1;">
+                <div class="toast-title">${title || 'Notificação'}</div>
+                <div class="toast-text">${text || ''}</div>
+                <div class="toast-bar"><div style="animation-duration: 2600ms;"></div></div>
+            </div>
+        `;
+        root.appendChild(toast);
+        window.setTimeout(() => toast.remove(), 2700);
+    };
 });
