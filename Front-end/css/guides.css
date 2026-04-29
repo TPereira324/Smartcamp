@@ -199,6 +199,11 @@
     background: rgba(27, 27, 27, 0.08);
 }
 
+.guide-login-box[hidden],
+.guide-login-box.hidden {
+    display: none !important;
+}
+
 .guide-login-icon {
     font-size: 18px;
     color: rgba(27, 27, 27, 0.58);

@@ -43,7 +43,15 @@
 
         <script>
             (function () {
-                const user = JSON.parse(localStorage.getItem('user'));
+                const readUser = () => {
+                    try {
+                        const raw = localStorage.getItem('user');
+                        return raw ? JSON.parse(raw) : null;
+                    } catch {
+                        return null;
+                    }
+                };
+                const user = readUser();
                 const completedKey = 'cocoRootCompletedModules';
                 const readCompletedStore = () => {
                     try {
@@ -68,12 +76,19 @@
                     .map(([k, v]) => ({ id: Number(k), ...v }))
                     .sort((a, b) => a.id - b.id);
 
-                if (!user) {
+                if (!user || !user.id) {
                     const notice = document.getElementById('login-notice');
-                    if (notice) notice.hidden = false;
+                    if (notice) {
+                        notice.hidden = false;
+                        notice.classList.remove('hidden');
+                    }
                 } else {
                     const notice = document.getElementById('login-notice');
-                    if (notice) notice.hidden = true;
+                    if (notice) {
+                        notice.hidden = true;
+                        notice.classList.add('hidden');
+                        notice.style.display = 'none';
+                    }
                 }
 
                 const grid = document.getElementById('modules-grid');
