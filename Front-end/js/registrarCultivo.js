@@ -2,6 +2,7 @@
     const form = document.querySelector('[data-cultivo-form]');
     if (!form) return;
     const api = window.CocoRootApi;
+    const alertsStorageKey = 'cocoRootDashboardAlerts';
 
     const stepMeta = document.querySelector('[data-step-meta]');
     const stepperDots = Array.from(document.querySelectorAll('[data-stepper-dot]'));
@@ -45,6 +46,26 @@
         }
         errorBox.hidden = false;
         errorBox.textContent = msg;
+    };
+
+    const readAlertsStore = () => {
+        try {
+            const raw = localStorage.getItem(alertsStorageKey);
+            return raw ? JSON.parse(raw) : {};
+        } catch {
+            return {};
+        }
+    };
+
+    const writeAlertsStore = (store) => {
+        localStorage.setItem(alertsStorageKey, JSON.stringify(store || {}));
+    };
+
+    const persistLocalAlert = (userId, alerta) => {
+        const store = readAlertsStore();
+        const current = Array.isArray(store?.[userId]) ? store[userId] : [];
+        store[userId] = [alerta, ...current].slice(0, 20);
+        writeAlertsStore(store);
     };
 
     const getNumber = (input) => {
@@ -154,6 +175,16 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
+            });
+            persistLocalAlert(String(user.id), {
+                id: `local_alert_${Date.now()}`,
+                nivel: 'info',
+                categoria: 'Parcela',
+                titulo: 'Nova parcela registada',
+                mensagem: `A parcela "${payload.par_nome}" foi criada com sucesso e já está disponível no dashboard.`,
+                parcela_nome: payload.par_nome,
+                created_at: new Date().toISOString(),
+                local_only: true,
             });
             window.location.href = 'dashboard.html';
         } catch (error) {

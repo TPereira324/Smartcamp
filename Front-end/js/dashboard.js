@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const tasksStorageKey = 'cocoRootTasks';
+    const alertsStorageKey = 'cocoRootDashboardAlerts';
 
     const readTasksStore = () => {
         try {
@@ -154,6 +155,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const writeTasksStore = (store) => {
         localStorage.setItem(tasksStorageKey, JSON.stringify(store || {}));
+    };
+
+    const readAlertsStore = () => {
+        try {
+            const raw = localStorage.getItem(alertsStorageKey);
+            return raw ? JSON.parse(raw) : {};
+        } catch {
+            return {};
+        }
+    };
+
+    const writeAlertsStore = (store) => {
+        localStorage.setItem(alertsStorageKey, JSON.stringify(store || {}));
     };
 
     const normalizeText = (value) => String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -287,6 +301,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         writeTasksStore(next);
     };
 
+    const getUserLocalAlerts = (userId) => {
+        const store = readAlertsStore();
+        const now = Date.now();
+        const maxAgeMs = 7 * 24 * 60 * 60 * 1000;
+        const alerts = (Array.isArray(store?.[userId]) ? store[userId] : []).filter((alerta) => {
+            const createdAt = new Date(alerta?.created_at || alerta?.data || alerta?.date || 0).getTime();
+            return !Number.isFinite(createdAt) || now - createdAt <= maxAgeMs;
+        });
+
+        if ((store?.[userId] || []).length !== alerts.length) {
+            const next = { ...store, [userId]: alerts };
+            writeAlertsStore(next);
+        }
+
+        return alerts;
+    };
+
     const renderTasks = (tasks, options = {}) => {
         if (!tarefasContainer) return;
         const all = Array.isArray(tasks) ? tasks : [];
@@ -401,6 +432,35 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
     };
 
+    const buildAlertKey = (alerta) => {
+        const title = normalizeText(getAlertTitle(alerta));
+        const text = normalizeText(getAlertText(alerta));
+        const parcela = normalizeText(alerta?.parcela_nome || alerta?.parcela || '');
+        const category = normalizeText(getAlertCategory(alerta));
+        return `${title}::${text}::${parcela}::${category}`;
+    };
+
+    const mergeAlerts = (...groups) => {
+        const seen = new Set();
+        const merged = [];
+
+        groups.flat().forEach((alerta) => {
+            if (!alerta) return;
+            const key = buildAlertKey(alerta);
+            if (seen.has(key)) return;
+            seen.add(key);
+            merged.push(alerta);
+        });
+
+        return merged.sort((a, b) => {
+            const aTime = new Date(a?.created_at || a?.updated_at || a?.data || 0).getTime();
+            const bTime = new Date(b?.created_at || b?.updated_at || b?.data || 0).getTime();
+            const safeA = Number.isFinite(aTime) ? aTime : 0;
+            const safeB = Number.isFinite(bTime) ? bTime : 0;
+            return safeB - safeA;
+        });
+    };
+
     const generateAlerts = ({ parcelas, tarefas, clima }) => {
         const alerts = [];
         const add = (nivel, categoria, titulo, mensagem, extra = {}) => {
@@ -510,9 +570,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         const parcelas = Array.isArray(parcelasResponse?.data) ? parcelasResponse.data : [];
         const serverTarefas = Array.isArray(tarefasResponse?.data) ? tarefasResponse.data : [];
         const serverAlertas = Array.isArray(alertasResponse?.data) ? alertasResponse.data : [];
+        const userId = String(user.id ?? 'anon');
+        const localAlertas = getUserLocalAlerts(userId);
 
         if (parcelasCount) parcelasCount.textContent = String(parcelas.length);
-        if (alertasCount) alertasCount.textContent = String(serverAlertas.length);
+        if (alertasCount) alertasCount.textContent = String(serverAlertas.length + localAlertas.length);
         if (alertasLabel) alertasLabel.textContent = '';
 
         if (parcelas.length === 0) {
@@ -532,7 +594,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }).join('');
         }
 
-        const userId = String(user.id ?? 'anon');
         const hasServerTasks = serverTarefas.length > 0;
         let tarefas = hasServerTasks ? serverTarefas : [];
 
@@ -586,7 +647,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             renderTasks(tarefas, { onlyToday: true });
         }
 
-        const alertas = serverAlertas;
+        const generatedAlertas = generateAlerts({ parcelas, tarefas, clima });
+        const alertas = mergeAlerts(serverAlertas, localAlertas, generatedAlertas);
 
         if (alertasCount) alertasCount.textContent = String(Array.isArray(alertas) ? alertas.length : 0);
         if (alertasLabel) {
