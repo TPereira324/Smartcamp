@@ -10,7 +10,8 @@
 
 <body class="auth-page">
     <div class="auth-img">
-        <a href="welcomeScreen.html" class="auth-back" aria-label="Voltar"><i class="bi bi-chevron-left" aria-hidden="true"></i></a>
+        <a href="welcomeScreen.html" class="auth-back" aria-label="Voltar"><i class="bi bi-chevron-left"
+                aria-hidden="true"></i></a>
     </div>
 
     <div class="auth-form">
@@ -19,7 +20,7 @@
                 <img src="../image/logo.jpeg" alt="CocoRoot" class="auth-brand">
             </div>
 
-            <form id="login-form" action="../../Back-end/login.php" method="POST">
+            <form id="login-form" action="#" method="POST">
                 <div class="form-group">
                     <label for="email">Digite o seu e-mail</label>
                     <input type="email" id="email" name="email" placeholder="Ex: maria123@gmail.com" required>
@@ -61,11 +62,16 @@
 
         document.getElementById('login-form').addEventListener('submit', async function (e) {
             e.preventDefault();
+            const form = document.getElementById('login-form');
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const endpoint = window.CocoRootApi
                 ? window.CocoRootApi.buildPhpUrl('login.php')
-                : new URL('../../Back-end/login.php', window.location.href).toString();
+                : new URL('/CocoRoot/Back-end/login.php', window.location.origin).toString();
+
+            if (form) {
+                form.action = endpoint;
+            }
 
             try {
                 const response = await fetch(endpoint, {

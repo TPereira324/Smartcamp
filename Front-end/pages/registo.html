@@ -10,7 +10,8 @@
 
 <body class="auth-page">
     <div class="auth-img">
-        <a href="#" id="register-back" class="auth-back" aria-label="Voltar"><i class="bi bi-chevron-left" aria-hidden="true"></i></a>
+        <a href="#" id="register-back" class="auth-back" aria-label="Voltar"><i class="bi bi-chevron-left"
+                aria-hidden="true"></i></a>
     </div>
 
     <div class="auth-form">
@@ -19,7 +20,7 @@
                 <img src="../image/logo.jpeg" alt="CocoRoot" class="auth-brand">
             </div>
 
-            <form id="register-form" action="../../Back-end/registrar.php" method="POST">
+            <form id="register-form" action="#" method="POST">
                 <div class="register-step" id="step-1">
                     <div class="form-group">
                         <label for="fullname">Digite o seu nome completo</label>
@@ -71,7 +72,8 @@
                     <div class="form-group">
                         <label for="farm_name">Digite o nome da sua fazenda</label>
                         <div class="auth-row">
-                            <input type="text" id="farm_name" name="farm_name" placeholder="Ex: Quinta do Vale" required>
+                            <input type="text" id="farm_name" name="farm_name" placeholder="Ex: Quinta do Vale"
+                                required>
                             <button type="button" class="auth-next next-step" aria-label="Próximo">
                                 <i class="bi bi-chevron-right" aria-hidden="true"></i>
                             </button>
@@ -133,10 +135,16 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const backBtn = document.getElementById('register-back');
+                const registerForm = document.getElementById('register-form');
                 const regPasswordInput = document.getElementById('password');
                 const regConfirmPasswordInput = document.getElementById('confirm_password');
                 const toggleRegPasswordBtn = document.getElementById('toggle-register-password');
                 const toggleRegConfirmPasswordBtn = document.getElementById('toggle-register-confirm-password');
+
+                if (registerForm && window.CocoRootApi) {
+                    registerForm.action = window.CocoRootApi.buildPhpUrl('registrar.php');
+                }
+
                 if (backBtn) {
                     backBtn.addEventListener('click', (e) => {
                         e.preventDefault();

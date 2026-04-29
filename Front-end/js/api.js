@@ -2,6 +2,7 @@
     // ---------------------------------------------------------------
     // CONFIGURAÇÃO MAMP PRO  (porta 80 — lido do httpd.conf)
     const MAMP_PORT = 80;
+    const DEFAULT_PROJECT_BASE_PATH = '/CocoRoot/';
     // ---------------------------------------------------------------
 
     // URL base do Apache MAMP (sem barra final)
@@ -11,25 +12,23 @@
 
     const isFileProtocol = window.location.protocol === 'file:';
 
-    // Calcula o path relativo do backend a partir do URL atual da página.
-    // Ex: se a página está em /Front-end/pages/login.html,
-    // o backend está em /Back-end/ (dois níveis acima + Back-end/)
-    //
-    // Em file:// o pathname vira algo como /C:/... e não é um path válido no Apache.
-    // Nesse caso, assume que o backend está disponível no Apache em /Back-end/.
-    const rawBackend = isFileProtocol
-        ? new URL(mampOrigin + '/Back-end/')
-        : new URL('../../Back-end/', window.location.href);
+    function detectProjectBasePath() {
+        if (isFileProtocol) {
+            return DEFAULT_PROJECT_BASE_PATH;
+        }
 
-    // Se a página NÃO está a ser servida pelo Apache do MAMP,
-    // substitui o origin pelo MAMP, mantendo o mesmo path.
-    const servedByMamp = rawBackend.origin === mampOrigin
-        || rawBackend.origin === 'http://localhost:80'
-        || rawBackend.origin === 'http://localhost';
+        const match = window.location.pathname.match(/^(.*?\/)(Front-end|Back-end)\//);
+        if (match && match[1] && match[1] !== '/') {
+            return match[1];
+        }
 
-    const backendPath = isFileProtocol ? '/Back-end/' : rawBackend.pathname;
-    const backendBaseUrl = (servedByMamp ? rawBackend.origin : mampOrigin) + backendPath;
-    const apiBaseUrl     = backendBaseUrl + 'api.php/';
+        return DEFAULT_PROJECT_BASE_PATH;
+    }
+
+    const projectBasePath = detectProjectBasePath();
+    const rawBackend = new URL(`${projectBasePath.replace(/\/?$/, '/')}Back-end/`, mampOrigin);
+    const backendBaseUrl = rawBackend.toString();
+    const apiBaseUrl = backendBaseUrl + 'api.php/';
 
     function buildBackendUrl(path = '') {
         return new URL(String(path).replace(/^\/+/, ''), apiBaseUrl).toString();

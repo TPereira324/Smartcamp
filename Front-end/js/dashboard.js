@@ -586,10 +586,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             renderTasks(tarefas, { onlyToday: true });
         }
 
-        const hasServerAlerts = serverAlertas.length > 0;
-        const alertas = hasServerAlerts
-            ? serverAlertas
-            : generateAlerts({ parcelas, tarefas, clima });
+        const alertas = serverAlertas;
 
         if (alertasCount) alertasCount.textContent = String(Array.isArray(alertas) ? alertas.length : 0);
         if (alertasLabel) {
