@@ -1,71 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Começar do Zero - CocoRoot</title>
     <link rel="stylesheet" href="../css/cocoroot.css">
 </head>
+
 <body class="app-page">
-    
-
     <div class="page-content">
-        <div class="page-title">Começar do Zero — Guia</div>
-
-        <div class="guia-header">
-            <a href="principal.html" style="text-decoration:none;color:rgba(27,27,27,0.82);font-weight:800;">← Home</a>
-            <div class="guia-progress">
-                <span>Progresso</span>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width:25%;"></div>
+        <section class="guide-shell">
+            <div class="guide-head">
+                <div>
+                    <div class="guide-title">Começar do Zero - Guia</div>
+                    <div class="guide-subtitle">Guia passo a passo para começar a utilizar substrato de fibra de coco
+                        nos seus cultivos</div>
                 </div>
-                <span style="font-size:12px;">25%</span>
             </div>
-        </div>
 
-        <div class="modulos-grid" id="modules-grid"></div>
+            <div class="guide-progress-label">O seu progresso:</div>
+            <div class="guide-progress-box">
+                <div class="guide-progress-bar">
+                    <div class="guide-progress-fill" id="guide-progress-fill"></div>
+                    <div class="guide-progress-percent" id="guide-progress-percent">0%</div>
+                </div>
+            </div>
+            <div class="guide-progress-meta"><span id="guide-progress-count">0 / 4</span> status</div>
 
-        <style>
-            .modulo-card.locked {
-                opacity: 0.6;
-                cursor: not-allowed;
-                pointer-events: none;
-                filter: grayscale(1);
-            }
-            .modulo-card.completed .modulo-status-icon {
-                color: var(--primary) !important;
-            }
-        </style>
+            <div class="modules-grid" id="modules-grid"></div>
+
+            <div class="guide-login-box" id="login-notice" hidden>
+                <div class="guide-login-icon"><i class="bi bi-lock-fill" aria-hidden="true"></i></div>
+                <div class="guide-login-copy">
+                    <div class="guide-login-title">Inicie sessão para acompanhar o seu progresso</div>
+                    <div class="guide-login-text">Os módulos desbloqueiam-se progressivamente após realizar o primeiro.
+                    </div>
+                </div>
+                <a href="login.html" class="btn outline">Entrar</a>
+            </div>
+        </section>
 
         <script>
-            (function() {
+            (function () {
                 const user = JSON.parse(localStorage.getItem('user'));
                 const completedModules = JSON.parse(localStorage.getItem('completedModules') || '[]');
                 const modules = {
-                    1: { title: 'Introdução', img: '../image/planta.jpeg' },
-                    2: { title: 'Preparação do substrato', img: '../image/Coco.jpeg' },
-                    3: { title: 'Plantio e rega', img: '../image/planta.jpeg' },
-                    4: { title: 'Manutenção', img: '../image/Coco.jpeg' },
+                    1: { title: 'Introdução', status: 'Em curso' },
+                    2: { title: 'Preparação do Substrato', status: 'Em breve' },
+                    3: { title: 'Plantio e Rega', status: 'Em breve' },
+                    4: { title: 'Manutenção', status: 'Em breve' },
                 };
                 const moduleEntries = Object.entries(modules)
                     .map(([k, v]) => ({ id: Number(k), ...v }))
                     .sort((a, b) => a.id - b.id);
 
-                // Add notice for non-logged users
                 if (!user) {
-                    const notice = document.createElement('div');
-                    notice.id = 'login-notice';
-                    notice.style.cssText = 'background:rgba(62,92,50,0.12);border:1px solid rgba(62,92,50,0.3);border-radius:8px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;gap:12px;';
-                    notice.innerHTML = `
-                        <span style="font-size:20px;">🔒</span>
-                        <div style="flex:1;">
-                            <div style="font-weight:900;margin-bottom:4px;">Inicie sessão para acompanhar o seu progresso</div>
-                            <div style="color:var(--muted);font-size:13px;">Os módulos desbloqueiam-se progressivamente após iniciar sessão.</div>
-                        </div>
-                        <a href="login.html" class="btn" style="background:var(--primary);color:white;padding:8px 16px;font-size:13px;">Entrar</a>
-                    `;
-                    const grid = document.querySelector('.modulos-grid');
-                    grid.parentNode.insertBefore(notice, grid.nextSibling);
+                    const notice = document.getElementById('login-notice');
+                    if (notice) notice.hidden = false;
                 }
 
                 const grid = document.getElementById('modules-grid');
@@ -78,45 +70,46 @@
 
                         const a = document.createElement('a');
                         a.href = `comecar-modulo.html?mod=${module.id}`;
-                        a.className = 'modulo-card' + (isLocked ? ' locked' : '') + (isCompleted ? ' completed' : '');
+                        a.className = 'module-card' + (isLocked ? ' locked' : '') + (isCompleted ? ' completed' : '') + (!isLocked && !isCompleted && module.id === 1 ? ' current' : '');
                         a.id = `mod-${module.id}`;
+                        if (isLocked) {
+                            a.setAttribute('aria-disabled', 'true');
+                            a.addEventListener('click', (e) => e.preventDefault());
+                        }
 
-                        const icon = isCompleted ? '✓' : (isLocked ? '🔒' : '→');
+                        const icon = isCompleted ? 'check-lg' : (isLocked ? 'lock' : 'check');
+                        const action = isCompleted ? 'Rever' : (isLocked ? '' : 'Fazer');
+                        const pill = isCompleted ? 'Concluído' : module.status;
 
                         a.innerHTML = `
-                            <div class="modulo-card-img img-ph" style="overflow:hidden;padding:0;">
-                                <img src="${module.img}" style="width:100%;height:100%;object-fit:cover;" alt="${module.title}">
+                            <div class="module-card-top">
+                                <div class="module-icon"><i class="bi bi-${icon}" aria-hidden="true"></i></div>
+                                <div class="module-pill">${pill}</div>
                             </div>
-                            <div class="modulo-card-lines">
-                                <div style="font-weight:900;">Módulo ${module.id}</div>
-                                <div style="color:var(--muted);">${module.title}</div>
+                            <div class="module-name">Módulo ${module.id}</div>
+                            <div class="module-caption">${module.title}</div>
+                            <div class="module-card-bottom">
+                                <div class="module-action">${action ? `${action} ->` : ''}</div>
+                                <div class="module-lock">${isLocked ? '<i class="bi bi-lock" aria-hidden="true"></i>' : ''}</div>
                             </div>
-                            <div class="modulo-status-icon" style="color:var(--muted);font-weight:800;">${icon}</div>
                         `;
 
                         grid.appendChild(a);
                     });
                 }
 
-                // Update progress bar
                 const total = moduleEntries.length || 1;
                 const progress = (completedModules.length / total) * 100;
-                const fill = document.querySelector('.progress-fill');
+                const fill = document.getElementById('guide-progress-fill');
                 if (fill) fill.style.width = progress + '%';
-                const label = document.querySelector('.guia-progress span:last-child');
-                if (label) label.textContent = Math.round(progress) + '%';
+                const percent = document.getElementById('guide-progress-percent');
+                if (percent) percent.textContent = Math.round(progress) + '%';
+                const count = document.getElementById('guide-progress-count');
+                if (count) count.textContent = `${completedModules.length} / ${total}`;
             })();
         </script>
-
-        <div class="dica-box">
-            💡 &nbsp; Dica do Dia
-            <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
-                <div style="color:var(--muted);text-transform:none;letter-spacing:0;font-weight:600;line-height:1.6;">
-                    Antes de plantar, confirma a drenagem do substrato. Um bom equilíbrio entre retenção e escoamento evita stress hídrico nas primeiras semanas.
-                </div>
-            </div>
-        </div>
     </div>
-<script src="../js/layout.js"></script>
+    <script src="../js/layout.js"></script>
 </body>
+
 </html>

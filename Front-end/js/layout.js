@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <a href="noticias.html" class="nav-link ${currentPath.includes('noticias') || currentPath.includes('post') ? 'active' : ''}">Notícias</a>
             <a href="dashboard.html" class="nav-link ${currentPath.includes('dashboard') || currentPath.includes('registrar-cultivo') ? 'active' : ''}">Dashboard</a>
             <a href="comunidade.html" class="nav-link ${currentPath.includes('comunidade') ? 'active' : ''}">Comunidade</a>
-            <a href="comecar.html" class="nav-link ${currentPath.includes('comecar') ? 'active' : ''}">Guia</a>
+            <a href="comecar.html" class="nav-link ${currentPath.includes('comecar') ? 'active' : ''}">Começar do Zero</a>
             <a href="sobre.html" class="nav-link ${currentPath.includes('sobre') ? 'active' : ''}">Sobre nós</a>
             ${user && user.role === 'admin' ? '<a href="dashboard.html?admin=true" class="nav-link active">Admin</a>' : ''}
         </div>
@@ -67,14 +67,14 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
     `;
 
-    // Inject header at the start of body
+   
     if (!document.body.classList.contains('auth-page') && !document.querySelector('.nav')) {
         document.body.insertAdjacentHTML('afterbegin', headerHTML);
     } else if (document.querySelector('.nav')) {
         document.querySelector('.nav').outerHTML = headerHTML;
     }
 
-    // Inject footer at the end of body
+    
     if (!document.body.classList.contains('auth-page')) {
         if (document.querySelector('.footer')) {
             document.querySelector('.footer').outerHTML = footerHTML;
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Handle Logout
+    
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {

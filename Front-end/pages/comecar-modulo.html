@@ -9,52 +9,38 @@
 </head>
 
 <body class="app-page">
-
-
-    <div class="page-content" style="max-width:900px;">
-        <div style="margin-bottom:18px;">
-            <a href="comecar.html" class="back-link">← Voltar ao Guia</a>
-        </div>
-
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px;">
-            <div>
-                <div id="modulo-kicker"
-                    style="font-size:12px;font-weight:900;letter-spacing:0.2px;color:var(--muted);margin-bottom:6px;">
-                    MÓDULO 1</div>
-                <div id="modulo-title" style="font-size:30px;font-weight:900;letter-spacing:-0.6px;line-height:1.15;">
-                    Introdução</div>
+    <div class="page-content module-page">
+        <section class="guide-shell">
+            <div class="module-header">
+                <div>
+                    <div class="module-heading" id="modulo-title">Introdução</div>
+                    <div class="module-subheading" id="modulo-kicker">Módulo 1</div>
+                </div>
+                <div id="modulo-status" class="guide-status">Em curso</div>
             </div>
-            <div id="modulo-status"
-                style="border:1px solid rgba(27,27,27,0.14);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;color:rgba(27,27,27,0.74);background:rgba(255,255,255,0.92);box-shadow:0 14px 26px rgba(0,0,0,0.06);">
-                ● Em curso</div>
-        </div>
 
-        <div class="modulo-img img-ph" style="overflow:hidden;padding:0;">
+            <div class="module-divider"></div>
 
-        </div>
+            <div class="module-img img-ph"></div>
 
-        <div
-            style="font-size:12px;font-weight:900;letter-spacing:0.2px;text-transform:uppercase;margin-bottom:12px;color:rgba(27,27,27,0.78);">
-            Passo a Passo</div>
-        <ul class="step-checklist" id="module-steps"></ul>
+            <div class="module-divider"></div>
 
-        <div style="margin-top:26px;">
-            <div
-                style="font-size:12px;font-weight:900;letter-spacing:0.2px;text-transform:uppercase;margin-bottom:12px;color:rgba(27,27,27,0.78);">
-                Materiais Necessários</div>
-            <div class="materiais-grid">
-                <ul class="materiais-list" id="module-materials"></ul>
-                <div class="img-ph" id="module-materials-img" style="height:160px;overflow:hidden;padding:0;">
+            <div class="module-body">
+                <div>
+                    <div class="module-section-title">Passo a Passo</div>
+                    <ul class="step-checklist" id="module-steps"></ul>
+                </div>
 
+                <div class="module-side">
+                    <div class="materials-title">Materiais necessários</div>
+                    <ul class="materials-list" id="module-materials"></ul>
+                    <div class="module-actions">
+                        <button id="finish-module" class="btn">Concluir módulo</button>
+                        <a id="next-module" href="comecar-modulo.html?mod=2" class="btn" hidden>Módulo 2 -></a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div style="margin-top:22px;display:flex;justify-content:flex-end;gap:12px;">
-            <button id="finish-module" class="btn" style="background:var(--primary);color:white;">Concluir
-                Módulo</button>
-            <a id="next-module" href="comecar-modulo.html?mod=2" class="btn" style="display:none;">Próximo Módulo →</a>
-        </div>
+        </section>
     </div>
 
     <script>
@@ -68,11 +54,11 @@
             if (!user) {
                 const pageContent = document.querySelector('.page-content');
                 pageContent.innerHTML = `
-                    <div style="text-align:center;padding:60px 20px;">
-                        <div style="font-size:64px;margin-bottom:20px;">🔒</div>
-                        <div style="font-size:24px;font-weight:900;margin-bottom:12px;">Inicie sessão para continuar</div>
-                        <div style="color:var(--muted);margin-bottom:24px;">Precisa de ter sessão iniciada para visualizar e realizar os módulos.</div>
-                        <a href="login.html" class="btn" style="background:var(--primary);color:white;padding:14px 28px;font-size:16px;">Iniciar Sessão</a>
+                    <div class="guide-shell module-empty-state">
+                        <div class="module-empty-icon">🔒</div>
+                        <div class="module-empty-title">Inicie sessão para continuar</div>
+                        <div class="module-empty-text">Precisa de ter sessão iniciada para visualizar e realizar os módulos.</div>
+                        <a href="login.html" class="btn">Iniciar sessão</a>
                     </div>
                 `;
                 return;
@@ -151,10 +137,9 @@
                 },
             };
             const current = modules[mod] || modules[1];
-            document.getElementById('modulo-kicker').textContent = 'MÓDULO ' + (modules[mod] ? mod : 1);
+            document.getElementById('modulo-kicker').textContent = 'Módulo ' + (modules[mod] ? mod : 1);
             document.getElementById('modulo-title').textContent = current.title;
 
-            // Fix: set image if element exists or just update the placeholder
             const imgPlaceholder = document.querySelector('.modulo-img');
             if (imgPlaceholder) {
                 imgPlaceholder.innerHTML = `<img src="${current.img}" style="width:100%;height:100%;object-fit:cover;" alt="${current.title}">`;
@@ -166,7 +151,6 @@
             const statusEl = document.getElementById('modulo-status');
             const stepsRoot = document.getElementById('module-steps');
             const materialsRoot = document.getElementById('module-materials');
-            const materialsImg = document.getElementById('module-materials-img');
 
             const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -199,12 +183,10 @@
                 const isCompleted = completedModules.includes(mod);
                 if (!statusEl) return;
                 if (isCompleted) {
-                    statusEl.textContent = '● Concluído';
-                    statusEl.style.color = 'var(--primary)';
+                    statusEl.textContent = 'Concluído';
                     return;
                 }
-                statusEl.textContent = `● Em curso (${progress}/${totalSteps})`;
-                statusEl.style.color = 'rgba(27,27,27,0.74)';
+                statusEl.textContent = 'Em curso';
             };
 
             const renderSteps = () => {
@@ -229,13 +211,11 @@
                     body.style.flex = '1';
 
                     const title = document.createElement('div');
-                    title.style.fontWeight = '900';
-                    title.style.marginBottom = '4px';
+                    title.className = 'step-title-row';
                     title.textContent = step?.title || `Passo ${stepNumber}`;
 
                     const desc = document.createElement('div');
-                    desc.style.color = 'var(--muted)';
-                    desc.style.lineHeight = '1.6';
+                    desc.className = 'step-desc-row';
                     desc.textContent = step?.description || '';
 
                     body.appendChild(title);
@@ -282,26 +262,22 @@
                         materialsRoot.appendChild(li);
                     });
                 }
-                if (materialsImg) {
-                    materialsImg.innerHTML = current.img
-                        ? `<img src="${current.img}" style="width:100%;height:100%;object-fit:cover;" alt="${current.title}">`
-                        : '';
-                }
             };
 
             const syncButtons = () => {
                 const isCompleted = completedModules.includes(mod);
                 if (finishBtn) {
-                    finishBtn.style.display = 'inline-block';
                     finishBtn.disabled = !isCompleted && progress < totalSteps;
                     finishBtn.textContent = isCompleted ? 'Voltar ao Guia' : 'Concluir Módulo';
                 }
                 if (nextBtn) {
-                    if (isCompleted && modules[next]) {
-                        nextBtn.style.display = 'inline-block';
+                    if (modules[next]) {
+                        nextBtn.hidden = false;
                         nextBtn.setAttribute('href', 'comecar-modulo.html?mod=' + next);
+                        nextBtn.textContent = 'Módulo ' + next + ' ->';
+                        nextBtn.classList.toggle('is-disabled', !isCompleted);
                     } else {
-                        nextBtn.style.display = 'none';
+                        nextBtn.hidden = true;
                     }
                 }
             };
