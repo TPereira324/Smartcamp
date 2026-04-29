@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const headerHTML = `
     <nav class="nav">
-        <a href="#" class="nav-back" aria-label="Voltar"><i class="bi bi-chevron-left" aria-hidden="true"></i></a>
         <a href="principal.html" class="nav-logo" aria-label="CocoRoot">
             <img src="${assetPrefix}image/logo.jpeg" alt="" class="nav-brand">
             <span class="nav-title">CocoRoot</span>
@@ -24,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span class="nav-user-info">${user.nome}</span>
                 <a href="#" id="logout-btn" class="nav-link nav-logout"><i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair</a>
             ` : `
-                <a href="login.html" class="nav-btn"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> Entrar</a>
-                <a href="registo.html" class="nav-btn"><i class="bi bi-person-plus" aria-hidden="true"></i> Criar Conta</a>
+                <a href="login.html" class="btn outline"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> Entrar</a>
+                <a href="registo.html" class="btn outline"><i class="bi bi-person-plus" aria-hidden="true"></i> Criar Conta</a>
             `}
         </div>
     </nav>
@@ -90,20 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             localStorage.removeItem('user');
-            window.location.href = 'principal.html';
-        });
-    }
-
-    const backBtn = document.querySelector('.nav-back');
-    if (backBtn) {
-        const hideBack = currentPath.includes('principal') || currentPath === 'index.html';
-        backBtn.style.display = hideBack ? 'none' : 'grid';
-        backBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (window.history.length > 1) {
-                window.history.back();
-                return;
-            }
             window.location.href = 'principal.html';
         });
     }
