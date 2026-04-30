@@ -5,7 +5,7 @@
     const alertsStorageKey = 'cocoRootDashboardAlerts';
 
     const stepMeta = document.querySelector('[data-step-meta]');
-    const stepperDots = Array.from(document.querySelectorAll('[data-stepper-dot]'));
+    const progressBar = document.querySelector('[data-cultivo-progress]');
     const steps = Array.from(document.querySelectorAll('[data-step]'));
     const errorBox = document.querySelector('[data-cultivo-error]');
 
@@ -117,9 +117,9 @@
         state.step = clamped;
 
         steps.forEach((s) => s.classList.toggle('active', Number(s.dataset.step) === clamped));
-        stepperDots.forEach((d, idx) => d.classList.toggle('active', idx + 1 <= clamped));
 
         if (stepMeta) stepMeta.textContent = `Passo ${clamped} de ${max}`;
+        if (progressBar) progressBar.style.width = `${(clamped / max) * 100}%`;
 
         if (btnPrev) btnPrev.hidden = clamped === 1;
         if (btnNext) btnNext.hidden = clamped === max;

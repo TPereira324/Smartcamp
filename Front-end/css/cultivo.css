@@ -1,53 +1,60 @@
+.cultivo-page .page-content {
+    max-width: 1280px;
+    padding-top: 36px;
+    padding-bottom: 56px;
+}
+
 .cultivo-wrapper {
-    max-width: 760px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 48px 40px;
+    padding: 32px 28px 18px;
+    border-radius: 24px;
+    background: #edf4eb;
+    border: 1px solid rgba(83, 121, 72, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
 }
 
 .cultivo-topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 28px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid rgba(47, 111, 59, 0.14);
-    flex-wrap: wrap;
+    margin-bottom: 12px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid rgba(124, 84, 52, 0.7);
 }
 
 .cultivo-title {
     font-size: 20px;
     font-weight: 900;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    text-transform: none;
+}
+
+.cultivo-progress-shell {
+    margin-bottom: 32px;
 }
 
 .cultivo-stepmeta {
-    font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #555;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    color: rgba(27, 27, 27, 0.82);
 }
 
-.cultivo-stepper {
-    display: flex;
-    gap: 8px;
-    align-items: center;
+.cultivo-progress {
     width: 100%;
-    max-width: 420px;
-}
-
-.cultivo-stepper-dot {
-    flex: 1;
-    height: 6px;
-    border: 0;
-    background: rgba(47, 143, 61, 0.16);
+    height: 11px;
     border-radius: 999px;
+    background: rgba(27, 27, 27, 0.08);
+    overflow: hidden;
 }
 
-.cultivo-stepper-dot.active {
-    background: rgba(47, 143, 61, 0.92);
+.cultivo-progress-fill {
+    width: 20%;
+    height: 100%;
+    border-radius: inherit;
+    background: #2f8f3d;
+    transition: width 180ms ease;
 }
 
 .cultivo-step {
@@ -59,50 +66,153 @@
 }
 
 .cultivo-card {
-    border: 1px solid rgba(47, 111, 59, 0.14);
-    padding: 18px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 12px 0 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.cultivo-step-heading {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 900;
+    color: rgba(27, 27, 27, 0.96);
+}
+
+.cultivo-step-subheading {
+    margin-bottom: 20px;
+    text-align: center;
+    color: rgba(27, 27, 27, 0.76);
+    line-height: 1.5;
 }
 
 .field-row {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 18px;
+}
+
+.field-row-single {
+    max-width: 470px;
+    margin: 0 auto;
 }
 
 .field-inline {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 10px;
-    align-items: end;
+    gap: 0;
+    align-items: stretch;
+}
+
+.cultivo-form-group {
+    margin-bottom: 0;
+}
+
+.cultivo-form-group label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: rgba(27, 27, 27, 0.9);
+}
+
+.cultivo-form-group input,
+.cultivo-select {
+    height: 46px;
+    border: 1px solid rgba(27, 27, 27, 0.18);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.32);
+    box-shadow: none;
+}
+
+.cultivo-form-group input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-right: 16px;
+}
+
+.cultivo-form-group input::placeholder {
+    color: rgba(27, 27, 27, 0.34);
 }
 
 .field-unit {
-    border: 1px solid rgba(47, 111, 59, 0.18);
-    padding: 14px 16px;
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    height: 53px;
+    border: 1px solid rgba(27, 27, 27, 0.18);
+    border-left: 0;
+    padding: 0 18px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    height: 46px;
     display: flex;
     align-items: center;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.96);
+    border-radius: 0 12px 12px 0;
+    background: rgba(255, 255, 255, 0.32);
+    color: rgba(27, 27, 27, 0.64);
+}
+
+.cultivo-select-group {
+    max-width: 470px;
+    margin: 0 auto;
+}
+
+.cultivo-select-wrap {
+    position: relative;
+}
+
+.cultivo-select {
+    width: 100%;
+    padding: 0 48px 0 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cultivo-select-wrap i {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(27, 27, 27, 0.9);
+    pointer-events: none;
+    font-size: 18px;
 }
 
 .cultivo-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 12px;
-    margin-top: 18px;
+    margin-top: 10px;
     flex-wrap: wrap;
 }
 
-.cultivo-actions .btn {
-    min-width: 160px;
+.cultivo-actions-right {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+    flex-wrap: wrap;
+}
+
+.cultivo-next-btn,
+.cultivo-prev-btn {
+    min-width: 104px;
+    min-height: 40px;
+    padding: 10px 14px;
+    border-radius: 10px;
+}
+
+.cultivo-next-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.cultivo-next-btn i {
+    font-size: 18px;
 }
 
 .cultivo-error {
@@ -121,6 +231,8 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    max-width: 520px;
+    margin: 0 auto;
 }
 
 .cultivo-summary-row {
@@ -146,7 +258,30 @@
     letter-spacing: 1px;
 }
 
-@media (max-width: 520px) {
-    .cultivo-wrapper { padding: 32px 20px; }
-    .cultivo-actions .btn { width: 100%; }
+@media (max-width: 760px) {
+    .cultivo-page .page-content {
+        padding: 24px 18px 38px;
+    }
+
+    .cultivo-wrapper {
+        padding: 22px 16px 18px;
+        border-radius: 18px;
+    }
+
+    .cultivo-card,
+    .field-row-single,
+    .cultivo-select-group {
+        max-width: 100%;
+    }
+
+    .cultivo-actions,
+    .cultivo-actions-right {
+        width: 100%;
+    }
+
+    .cultivo-actions .btn,
+    .cultivo-actions-right .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
