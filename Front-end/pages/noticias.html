@@ -117,8 +117,8 @@
 
             const renderArticles = () => {
                 const filtered = activeFilter === 'all'
-                    ? articles.slice(0, 3)
-                    : articles.filter((item) => item.category === activeFilter).slice(0, 3);
+                    ? articles
+                    : articles.filter((item) => item.category === activeFilter);
 
                 listRoot.innerHTML = filtered.map((article) => `
                     <a class="article-item" href="post.html?id=${article.id}">
