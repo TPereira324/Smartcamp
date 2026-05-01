@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - CocoRoot</title>
+    <link rel="stylesheet" href="../css/cocoroot.css">
+</head>
+
+<body class="app-page">
+    <div class="page-content">
+        <section class="profile-shell">
+            <div class="profile-head">
+                <div class="profile-title">Meu Perfil</div>
+                <div class="profile-subtitle">Gerencie dados pessoais, preferências e acompanhe sua evolução.</div>
+                <div class="profile-divider"></div>
+            </div>
+
+            <div class="profile-layout">
+                <aside class="profile-sidebar">
+                    <div class="profile-card">
+                        <div id="profile-avatar" class="profile-avatar">U</div>
+                        <div id="profile-name" class="profile-name">Utilizador</div>
+                        <div id="profile-role" class="profile-role">Conta CocoRoot</div>
+                        <div class="profile-progress-title">Progresso geral</div>
+                        <div class="profile-progress-track">
+                            <div id="profile-progress-fill" class="profile-progress-fill"></div>
+                        </div>
+                        <div id="profile-progress-text" class="profile-progress-text">0% concluído</div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-section-title">Resumo rápido</div>
+                        <div class="profile-mini-stats">
+                            <div class="profile-mini-stat">
+                                <strong id="profile-stat-parcelas">0</strong>
+                                <span>Parcelas</span>
+                            </div>
+                            <div class="profile-mini-stat">
+                                <strong id="profile-stat-pendentes">0</strong>
+                                <span>Pendentes</span>
+                            </div>
+                            <div class="profile-mini-stat">
+                                <strong id="profile-stat-modulos">0</strong>
+                                <span>Módulos</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <main class="profile-main">
+                    <section class="profile-card">
+                        <div class="profile-section-head">
+                            <div class="profile-section-title">Dados da Conta</div>
+                            <button id="profile-save-btn" class="btn sm" type="button">Guardar Alterações</button>
+                        </div>
+                        <div class="profile-grid">
+                            <div class="form-group">
+                                <label for="profile-input-name">Nome</label>
+                                <input id="profile-input-name" type="text" placeholder="Seu nome">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-input-email">Email</label>
+                                <input id="profile-input-email" type="email" placeholder="seu@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-input-phone">Telefone</label>
+                                <input id="profile-input-phone" type="text" placeholder="+244 ...">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-input-location">Localização</label>
+                                <input id="profile-input-location" type="text" placeholder="Cidade">
+                            </div>
+                        </div>
+                        <div id="profile-save-status" class="profile-save-status" hidden></div>
+                    </section>
+
+                    <section class="profile-card">
+                        <div class="profile-section-title">Preferências</div>
+                        <div class="profile-toggles">
+                            <label class="profile-toggle">
+                                <input id="pref-alertas" type="checkbox">
+                                <span>Receber alertas de tarefas</span>
+                            </label>
+                            <label class="profile-toggle">
+                                <input id="pref-resumo" type="checkbox">
+                                <span>Resumo semanal por email</span>
+                            </label>
+                            <label class="profile-toggle">
+                                <input id="pref-comunidade" type="checkbox">
+                                <span>Notificações da comunidade</span>
+                            </label>
+                        </div>
+                        <div class="profile-chip-title">Interesses de cultivo</div>
+                        <div id="profile-chips" class="profile-chips"></div>
+                    </section>
+
+                    <section class="profile-card">
+                        <div class="profile-section-title">Atividade recente</div>
+                        <div id="profile-activity" class="profile-activity"></div>
+                    </section>
+                </main>
+            </div>
+        </section>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/perfil.js"></script>
+    <script src="../js/layout.js"></script>
+</body>
+
+</html>

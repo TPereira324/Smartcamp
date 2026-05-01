@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="nav-right">
             ${user ? `
-                <span class="nav-user-info">${user.nome}</span>
+                <a href="perfil.html" class="nav-link ${currentPath.includes('perfil') ? 'active' : ''}" style="display:inline-flex;align-items:center;gap:6px;"><i class="bi bi-person-circle" aria-hidden="true"></i> ${user.nome}</a>
                 <a href="#" id="logout-btn" class="nav-link nav-logout"><i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair</a>
             ` : `
                 <a href="login.html" class="btn outline"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> Entrar</a>
@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <a href="mailto:contacto@cocoroot.pt">contacto@cocoroot.pt</a>
                     <a href="sobre.html">Sobre nós</a>
                     <a href="dashboard.html">Dashboard</a>
+                    <a href="perfil.html">Perfil</a>
                 </div>
             </div>
             <div>
