@@ -462,13 +462,6 @@
     border-bottom: 0;
 }
 
-.monitor-top-grid {
-    display: grid;
-    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
-    gap: 18px;
-    margin-bottom: 20px;
-}
-
 .monitor-accordion {
     display: flex;
     flex-direction: column;
@@ -627,50 +620,6 @@
     color: rgba(27, 27, 27, 0.62);
     font-size: 13px;
     line-height: 1.5;
-}
-
-.monitor-model-section {
-    margin-top: 16px;
-}
-
-.monitor-model-title {
-    margin-bottom: 12px;
-    font-size: 13px;
-    font-weight: 800;
-    color: rgba(27, 27, 27, 0.74);
-}
-
-.monitor-model-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-}
-
-.monitor-model-card {
-    padding: 14px 14px 16px;
-    border-radius: 14px;
-    border: 1px solid rgba(63, 142, 68, 0.22);
-    background: rgba(255, 255, 255, 0.74);
-}
-
-.monitor-model-card-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: rgba(27, 27, 27, 0.72);
-}
-
-.monitor-model-card-value {
-    margin-top: 6px;
-    font-size: 20px;
-    font-weight: 900;
-    color: rgba(27, 27, 27, 0.96);
-}
-
-.monitor-model-card-sub {
-    margin-top: 8px;
-    font-size: 12px;
-    line-height: 1.5;
-    color: rgba(27, 27, 27, 0.56);
 }
 
 .weather-shell {
@@ -837,9 +786,7 @@
         gap: 18px;
     }
 
-    .monitor-top-grid,
     .monitor-cards-grid,
-    .monitor-model-grid,
     .weather-forecast-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -857,7 +804,6 @@
 
     .dash-stats-grid,
     .dash-cultivos-grid,
-    .monitor-top-grid,
     .dash-tabs {
         grid-template-columns: 1fr;
     }
@@ -875,7 +821,6 @@
     }
 
     .monitor-cards-grid,
-    .monitor-model-grid,
     .weather-hero-stats,
     .weather-forecast-grid {
         grid-template-columns: 1fr;
